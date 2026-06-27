@@ -1,4 +1,5 @@
 
+
 const db = require("../config/db");
 
 async function getUser(req, res) {
@@ -10,9 +11,49 @@ async function getUser(req, res) {
     }
 }
 
+
+
+async function removeUser(req, res) {
+    try {
+        const { user_id } = req.params;
+        console.log("PARAMS RECEIVED:", req.params);
+        if (!user_id) {
+            return res.status(400).json({
+                message: "user_id is missing in URL"
+            });
+        }
+        const sql = "DELETE FROM User WHERE user_id = ?";
+
+        const [result] = await db.query(sql, [user_id]);
+        console.log("DELETE RESULT:", result);
+        if (result.affectedRows === 0) {
+            return res.status(404).json({
+                message: "User not found"
+            });
+        }
+        res.status(200).send({ message: "the user has been deleted successfully !" })
+
+
+    } catch (err) {
+        console.log("ERROR:", err);
+        res.status(500).json({
+            message: "Database error",
+            error: err.message
+        });
+
+    }
+
+}
+
+
 async function createUser(req, res) {
     try {
         const { name, email, password } = req.body;
+        if(!name || !email || ! password){
+            return res.status(400).json({
+                message:"All fields are required."
+            })
+        }
 
         const sql = "INSERT INTO User (name, email, password) VALUES (?, ?, ?)";
 
@@ -29,6 +70,8 @@ async function createUser(req, res) {
 }
 
 module.exports = {
+
     getUser,
-    createUser
+    createUser,
+    removeUser
 };
