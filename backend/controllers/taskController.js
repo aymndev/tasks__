@@ -3,7 +3,7 @@ const db = require("../config/db")
 
 async function getTask(req, res) {
     try {
-        const [rows] = await db.query("SELECT * FROM Todo");
+        const [rows] = await db.query("SELECT * FROM Task");
         res.json(rows);
 
     } catch (err) {
@@ -24,7 +24,7 @@ async function removeTask(req, res) {
                 message: "id is missing in URL"
             });
         }
-        const sql = "DELETE  FROM Todo WHERE id=?";
+        const sql = "DELETE  FROM Todo WHERE task_id=?";
         const [result] = await db.query(sql, [id]);
         console.log("DELETE RESULT :", result);
         if (result.affectedRows === 0) {

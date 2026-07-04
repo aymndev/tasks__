@@ -55,7 +55,7 @@ async function createUser(req, res) {
             })
         }
 
-        const sql = "INSERT INTO User (name, email, password) VALUES (?, ?, ?)";
+        const sql = "INSERT INTO User (username, email, password) VALUES (?, ?, ?)";
 
         const [result] = await db.query(sql, [name, email, password]);
 
