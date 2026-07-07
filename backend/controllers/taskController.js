@@ -4,6 +4,7 @@ const db = require("../config/db")
 async function getTask(req, res) {
     try {
         const [rows] = await db.query("SELECT * FROM Task");
+        const userId = req.user.userId;
         res.json(rows);
 
     } catch (err) {

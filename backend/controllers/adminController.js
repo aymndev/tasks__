@@ -1,4 +1,4 @@
-const db = require("../config/db")
+const { connection: db } = require("../config/db");
 
 async function getPendingUsers(req, res) {
     try {
