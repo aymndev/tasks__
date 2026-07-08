@@ -1,7 +1,43 @@
-import React from 'react'
-import { FaLongArrowAltRight } from "react-icons/fa";
 
-export default function login() {
+import { FaLongArrowAltRight } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { login } from "../services/auth"
+
+
+
+export default function Login() {
+    const navigate = useNavigate();
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    async function handleLogin(e) {
+        e.preventDefault()
+        console.log("Button clicked");
+
+        const response = await login({
+            email,
+            password,
+
+        })
+        const user = response.data.user;
+        
+        if (!user) {
+            alert("User not found. Please create a new account.");
+            return;
+        }
+        if (user.role == 'admin') {
+            navigate("/admin/dashboard");
+
+
+
+        } else {
+            navigate("/tasks");
+        }
+
+
+    }
+
     return (
         <div className='flex h-screen '>
 
@@ -38,11 +74,29 @@ export default function login() {
                     <h1 className='text-2xl font-bold text-green-900'>Welcome back</h1>
                     <p className='font-light text-sm text-gray-500'>sing in to your account to continue</p>
                     <div className='flex flex-col gap-1 mt-5'>
+
                         <p className='mt-1 text-sm '>Email address</p>
-                        <input className='bg-white text-black h-12 w-[100%] rounded-lg focus:outline-none p-3' />
+                        <input
+
+                            className='bg-white text-black h-12 w-[100%] rounded-lg focus:outline-none p-3'
+                            type="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+
+                        />
+
                         <p className='mt-1 text-sm '>Password</p>
-                        <input className='bg-white text-black h-13 w-[100%] rounded-lg focus:outline-none p-3' />
-                        <button className='bg-green-900 w-full h-9 text-xl font-bold rounded-lg mb-5 mt-5 text-white'>Sign in</button>
+                        <input
+                            value={password}
+                            className='bg-white text-black h-13 w-[100%] rounded-lg focus:outline-none p-3'
+                            type="password"
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+
+                        <button
+                            onClick={handleLogin}
+                            className='bg-green-900 w-full h-9 text-xl font-bold rounded-lg mb-5 mt-5 text-white hover:bg-green-500'>
+                            Sign in</button>
 
                     </div>
                     <div className='flex flex-col bg-green-200 rounded-lg border-1 border-white w-full h-[30%] items-center justify-center'>

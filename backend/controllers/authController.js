@@ -46,6 +46,7 @@ async function login(req, res) {
         const sql = "SELECT * FROM User WHERE email=?";
 
 
+
         const [rows] = await db.query(sql, [email])
 
         if (rows.length === 0) {
@@ -55,14 +56,11 @@ async function login(req, res) {
 
         }
         const user = rows[0];
-        if (password !== user.password) {
-            return res.status(401).json({
-                message: "Incorrect password"
-            });
-        }
+
 
 
         const isMatch = await bcrypt.compare(password, user.password);
+       
 
         if (!isMatch) {
             return res.status(401).json({
@@ -91,7 +89,13 @@ async function login(req, res) {
 
         return res.status(200).json({
             message: "The user is found seccessfully !",
-            token
+            token,
+            user:{
+                id:user.id,
+                username:user.username,
+                email:user.email,
+                role:user.role
+            }
 
 
 
