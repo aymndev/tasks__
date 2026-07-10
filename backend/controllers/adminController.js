@@ -73,31 +73,58 @@ async function rejectUser(req, res) {
     }
 
 }
-async function deleteUser(req,res) {
-    try{
+async function deleteUser(req, res) {
+    try {
 
-    
-    const {id}=req.params
-    const sql="DELETE FROM User WHERE id=?"
-    const [result]= await db.query(sql,[id])
-    return res.status(200).json({
-        message:"User has been deleted successfuly"
-    })
-    } catch(err){
+
+        const { id } = req.params
+        const sql = "DELETE FROM User WHERE id=?"
+        const [result] = await db.query(sql, [id])
+        return res.status(200).json({
+            message: "User has been deleted successfuly"
+        })
+    } catch (err) {
         return res.status(500).json({
-            message:"Somthing went wrong!",
-            error:err.message
+            message: "Somthing went wrong!",
+            error: err.message
         })
 
     }
 
-    
+
+}
+async function getStatistics(req, res) {
+    try {
+        const [[totalUsers]] = await db.query(
+            "SELECT COUNT(*) AS totale FROM User "
+        )
+        const [[activeUsers]] = await db.query(
+            "SELECT COUNT(*) AS totale  FROM User WHERE status='accepted'"
+        )
+        const [[pandingUsers]] = await db.query(
+            "SELECT COUNT(*) AS totale  FROM User WHERE status='panding'"
+
+        )
+        res.json({
+            totalUsers: totalUsers.totale,
+            activeUsers: activeUsers.totale,
+            pandingUsers: pandingUsers.totale,
+
+        })
+    } catch (err) {
+        res.status(500).json({
+            message: err.message
+        });
+
+    }
+
 }
 
-module.exports={
+module.exports = {
     getPendingUsers,
     deleteUser,
     rejectUser,
-    acceptUser
+    acceptUser,
+    getStatistics
 
 }
