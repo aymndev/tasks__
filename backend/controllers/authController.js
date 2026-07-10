@@ -36,9 +36,15 @@ async function register(req, res) {
 }
 
 async function login(req, res) {
-    try {
 
+
+
+    try {
+        console.log("✅ Login controller reached");
         const { email, password } = req.body;
+
+
+
 
 
 
@@ -57,10 +63,17 @@ async function login(req, res) {
         }
         const user = rows[0];
 
-
+        console.log("User from DB:", user);
+        console.log("Password entered:", password);
+        console.log("Password from DB:", user.password);
 
         const isMatch = await bcrypt.compare(password, user.password);
-       
+
+        console.log("isMatch:", isMatch);
+
+
+
+
 
         if (!isMatch) {
             return res.status(401).json({
@@ -68,16 +81,16 @@ async function login(req, res) {
             });
 
         }
-        if(user.status!=='accepted'){
+        if (user.status !== 'accepted') {
             return res.status(403).json({
-                message:"your account  has not been approved yet. "
+                message: "your account  has not been approved yet. "
             })
 
         }
 
         const token = jwt.sign(
             {
-                id: user.id,
+                id: user.user_id,
                 email: user.email
             },
             process.env.JWT_SECRET,
@@ -90,11 +103,11 @@ async function login(req, res) {
         return res.status(200).json({
             message: "The user is found seccessfully !",
             token,
-            user:{
-                id:user.id,
-                username:user.username,
-                email:user.email,
-                role:user.role
+            user: {
+                id: user.user_id,
+                username: user.username,
+                email: user.email,
+                role: user.role
             }
 
 
@@ -115,20 +128,20 @@ async function login(req, res) {
 
 
 }
-async function getUser(req,res){
-    try{
-    const sql="SELECT * FROM User"
-    const [rows] = await db.query(sql);
-    if(rows.length===0){
-        res.status(404).json({
-            message:"the user not found"
-        })
+async function getUser(req, res) {
+    try {
+        const sql = "SELECT * FROM User"
+        const [rows] = await db.query(sql);
+        if (rows.length === 0) {
+            res.status(404).json({
+                message: "the user not found"
+            })
+        }
+        return res.status(200).json(rows);
     }
-    return res.status(200).json(rows);
-    }
-    catch (err){
+    catch (err) {
         return res.status(500).json({
-            message:"somthing wrong",
+            message: "somthing wrong",
             error: err.message
 
         })

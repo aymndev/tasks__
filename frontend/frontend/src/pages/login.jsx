@@ -14,12 +14,16 @@ export default function Login() {
     async function handleLogin(e) {
         e.preventDefault()
         console.log("Button clicked");
+        console.log(email);
+        console.log(password);
+        
 
         const response = await login({
             email,
             password,
 
-        })
+        });
+        console.log(response.data);
         const user = response.data.user;
         
         if (!user) {
