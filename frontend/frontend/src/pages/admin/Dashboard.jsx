@@ -2,10 +2,14 @@ import { LuUsersRound } from "react-icons/lu";
 import { FaUserCheck } from "react-icons/fa";
 import { FaUserXmark } from "react-icons/fa6";
 import { GoGraph } from "react-icons/go";
+import NavBare from "../../components/NavBar"
 
 export default function Dashboard() {
   return (
     <div className='flex flex-col font-serif w-full p-[9rem]  bg-green-100 h-screen   '>
+      <div>
+        <NavBare/>
+      </div>
       <div className='flex flex-col ml-[10rem] mr-[10rem] '>
         <div className='flex justify-between'>
           <div>
