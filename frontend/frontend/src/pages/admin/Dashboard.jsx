@@ -5,10 +5,13 @@ import { GoGraph } from "react-icons/go";
 import { getStatistics } from "../../services/auth";
 import NavBare from "../../components/NavBar"
 import { useNavigate } from "react-router-dom";
-
+import AddUserForm from "../../components/AddUserForm";
 import { useEffect, useState } from "react";
+import AddUser from "./AddUser";
+
 
 export default function Dashboard() {
+  const [showForm,setShowForm]=useState(false);
   const navigate =useNavigate();
   const [stats, setState] = useState({
     totalUsers: 0,
@@ -39,10 +42,17 @@ export default function Dashboard() {
           <div className=''>
             <button 
             className='font-serif bg-green-600 rounded-lg p-2 '
-            onClick={()=>navigate('/admin/add-user')}
+            onClick={()=>setShowForm(!showForm)}
+            //onClick={()=>navigate('/admin/add-user')}
             >
               Add user
               </button>
+              {showForm&&(
+                <AddUserForm
+                closeForm={()=>setShowForm(false)}
+                
+                />
+              )}
 
           </div>
 
