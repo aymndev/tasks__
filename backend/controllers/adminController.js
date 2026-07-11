@@ -1,5 +1,5 @@
 const { connection: db } = require("../config/db");
-
+const { createUser } = require("../services/userService")
 async function getPendingUsers(req, res) {
     try {
         const sql = "SELECT * FROM User WHERE status='pending'"
@@ -78,7 +78,7 @@ async function deleteUser(req, res) {
 
 
         const { id } = req.params
-        const sql = "DELETE FROM User WHERE id=?"
+        const sql = "DELETE FROM User WHERE user_id=?"
         const [result] = await db.query(sql, [id])
         return res.status(200).json({
             message: "User has been deleted successfuly"
@@ -96,24 +96,52 @@ async function deleteUser(req, res) {
 async function getStatistics(req, res) {
     try {
         const [[totalUsers]] = await db.query(
-            "SELECT COUNT(*) AS totale FROM User "
+            "SELECT COUNT(*) AS total FROM User "
         )
         const [[activeUsers]] = await db.query(
-            "SELECT COUNT(*) AS totale  FROM User WHERE status='accepted'"
+            "SELECT COUNT(*) AS total  FROM User WHERE status='accepted'"
         )
         const [[pandingUsers]] = await db.query(
-            "SELECT COUNT(*) AS totale  FROM User WHERE status='panding'"
+            "SELECT COUNT(*) AS total FROM User WHERE status='pending'"
 
         )
         res.json({
-            totalUsers: totalUsers.totale,
-            activeUsers: activeUsers.totale,
-            pandingUsers: pandingUsers.totale,
+            totalUsers: totalUsers.total,
+            activeUsers: activeUsers.total,
+            pandingUsers: pandingUsers.total,
 
         })
     } catch (err) {
         res.status(500).json({
             message: err.message
+        });
+
+    }
+
+}
+async function addUser(req, res) {
+    try {
+        const { username, email, password, role } = req.body;
+        const userId = await createUser({
+            username,
+            email,
+            password,
+            role,
+            status: "accepted"
+        })
+        res.status(201).json({
+            message: "User created successfully",
+            userId,
+        });
+    } catch (err) {
+        if (err.message === "Email already exists") {
+            return res.status(409).json({
+                message: err.message,
+            });
+        }
+
+        res.status(500).json({
+            message: "Something went wrong",
         });
 
     }
@@ -125,6 +153,7 @@ module.exports = {
     deleteUser,
     rejectUser,
     acceptUser,
-    getStatistics
+    getStatistics,
+    addUser
 
 }
