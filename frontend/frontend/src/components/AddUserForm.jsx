@@ -8,7 +8,7 @@ export default function AddUserForm({ closeForm }) {
     const [password, setPassword] = useState("");
     const [role, setRole] = useState("user");
     async function handleSubmit(e) {
-        e.prebentDefault();
+        e.preventDefault();
         try {
             await addUser({
                 username,

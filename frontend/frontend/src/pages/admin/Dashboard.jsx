@@ -92,12 +92,24 @@ export default function Dashboard() {
 
 
       </div>
-      <div>
+      <div className=" flex  gap-10">
 
         <div>
+          <input
+          placeholder="fand"
+          className="bg-white p-2"
+          
+          />
+          
+          
 
         </div>
-        <h1>info</h1>
+        <div className="flex border rouded bg-gray-200 p-2 gap-5">
+          <button className="border rounded-lg p-1 pl-2 pr-2">All</button>
+          <button className="border rounded-lg p-1 pl-2 pr-2">Active</button>
+          <button className="border rounded-lg p-1 pl-2 pr-2">Suspended</button>
+        </div>
+        
 
       </div>
 
