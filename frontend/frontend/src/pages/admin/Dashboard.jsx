@@ -7,6 +7,7 @@ import NavBare from "../../components/NavBar"
 import { useNavigate } from "react-router-dom";
 import AddUserForm from "../../components/AddUserForm";
 import { useEffect, useState } from "react";
+import { IoMdAdd } from "react-icons/io";
 import AddUser from "./AddUser";
 
 
@@ -27,7 +28,7 @@ export default function Dashboard() {
     loadState();
   },[]);
   return (
-    <div className='flex flex-col font-serif w-full p-[9rem]  bg-green-100 h-screen   '>
+    <div className='flex flex-col font-serif w-full    bg-orange-100 h-screen   '>
       <div className="mb-9">
         <NavBare />
       </div>
@@ -41,17 +42,19 @@ export default function Dashboard() {
 
           <div className=''>
             <button 
-            className='font-serif bg-green-600 rounded-lg p-2 '
+            className='flex font-serif bg-orange-800  rounded-lg text-white p-2 pr-6 '
             onClick={()=>setShowForm(!showForm)}
-            //onClick={()=>navigate('/admin/add-user')}
+
             >
-              Add user
+              <IoMdAdd  className="h-6 mr-3"/>Add user
               </button>
               {showForm&&(
+                <div className="fixed inset-0 flex items-center justify-center bg-black/50  z-50 ">
                 <AddUserForm
                 closeForm={()=>setShowForm(false)}
                 
                 />
+                </div>
               )}
 
           </div>

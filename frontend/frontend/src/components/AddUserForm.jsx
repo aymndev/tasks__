@@ -26,7 +26,7 @@ export default function AddUserForm({ closeForm }) {
     }
 
     return (
-        <div className="mt-6 bg-white hadow rounded-lg p-6">
+        <div className="bg-white shadow-lg rounded-lg p-6 w-[450px]">
             <h2 className="text-xl font-bold mb-4">Add User</h2>
             <form onSubmit={handleSubmit}>
                 <input
