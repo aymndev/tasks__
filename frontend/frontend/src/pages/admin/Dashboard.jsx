@@ -4,10 +4,12 @@ import { FaUserXmark } from "react-icons/fa6";
 import { GoGraph } from "react-icons/go";
 import { getStatistics } from "../../services/auth";
 import NavBare from "../../components/NavBar"
+import { useNavigate } from "react-router-dom";
 
 import { useEffect, useState } from "react";
 
 export default function Dashboard() {
+  const navigate =useNavigate();
   const [stats, setState] = useState({
     totalUsers: 0,
     pandingUsers: 0,
@@ -35,7 +37,12 @@ export default function Dashboard() {
           </div>
 
           <div className=''>
-            <button className='font-serif bg-green-600 rounded-lg p-2 '>Add user</button>
+            <button 
+            className='font-serif bg-green-600 rounded-lg p-2 '
+            onClick={()=>navigate('/admin/add-user')}
+            >
+              Add user
+              </button>
 
           </div>
 
