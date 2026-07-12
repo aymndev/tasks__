@@ -10,10 +10,12 @@ import { CiSearch } from "react-icons/ci";
 import { useEffect, useState } from "react";
 import { IoMdAdd } from "react-icons/io";
 import AddUser from "./AddUser";
+import { getAllUsers } from "../../services/admin";
 
 
 export default function Dashboard() {
   const [showForm, setShowForm] = useState(false);
+  const [users, setUsers] = useState([]);
   const [selected, setSelected] = useState('all');
   const navigate = useNavigate();
   const [stats, setState] = useState({
@@ -21,6 +23,19 @@ export default function Dashboard() {
     pandingUsers: 0,
     activeUsers: 0,
   })
+  useEffect(() => {
+    async function loadUsers() {
+      try {
+        const response = await getAllUsers();
+        setUsers(response.data);
+
+      } catch (err) {
+        console.log(err);
+      }
+
+    }
+    loadUsers();
+  }, [])
   useEffect(() => {
     async function loadState() {
       const response = await getStatistics();
@@ -97,10 +112,10 @@ export default function Dashboard() {
       <div className=" flex flex-row justify-center pt-25  gap-10">
 
         <div className="flex   relative w-72">
-          <CiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-xl"/>
-          
+          <CiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-xl" />
+
           <input
-          type="text"
+            type="text"
             placeholder="Find..."
             className="w-full bg-white p-2 rounded-lg border pl-10 focus:outline-none focus:ring-2 focus:ring-orange-500"
 
@@ -113,9 +128,9 @@ export default function Dashboard() {
           <button
 
             onClick={() => setSelected('all')}
-            className={`rounded-lg p-1 pl-2  pr-2 ${selected ==="all"
-                ? " bg-gray-100 text-black transition-all duration-200"
-                : "hover:bg-gray-100  hover:text-black hover:text-xl  transition-all duration-200"
+            className={`rounded-lg p-1 pl-2  pr-2 ${selected === "all"
+              ? " bg-gray-100 text-black transition-all duration-200"
+              : "hover:bg-gray-100  hover:text-black hover:text-xl  transition-all duration-200"
               }`}
 
           >
@@ -124,8 +139,8 @@ export default function Dashboard() {
           <button
             onClick={() => setSelected('Active')}
             className={`rounded-lg p-1 pl-2 pr-2 ${selected === "Active"
-                ? " bg-gray-100 text-black  transition-all duration-200"
-                : "hover:bg-gray-100  hover:text-black hover:text-xl  transition-all duration-200"
+              ? " bg-gray-100 text-black  transition-all duration-200"
+              : "hover:bg-gray-100  hover:text-black hover:text-xl  transition-all duration-200"
               }`}
 
 
@@ -134,15 +149,85 @@ export default function Dashboard() {
           </button>
           <button
             onClick={() => setSelected('Suspended')}
-            className={`rounded-lg p-1 pl-2 pr-2 ${selected ==="Suspended"
-                ? " bg-gray-100 text-black  transition-all duration-200"
-                : "hover:bg-gray-100  hover:text-black hover:text-xl  transition-all duration-200"
+            className={`rounded-lg p-1 pl-2 pr-2 ${selected === "Suspended"
+              ? " bg-gray-100 text-black  transition-all duration-200"
+              : "hover:bg-gray-100  hover:text-black hover:text-xl  transition-all duration-200"
               }`}
           >
             Suspended
           </button>
         </div>
 
+
+      </div>
+      <div>
+        <div className="mt-8 bg-white rounded-xl shadow-md overflow-hidden">
+          <table className="w-full">
+            <thead className="bg-gray-100 border-b">
+              <tr>
+                <th className="text-left p-4">User</th>
+                <th className="text-left p-4">Email</th>
+                <th className="text-left p-4">Role</th>
+                <th className="text-left p-4">Status</th>
+                <th className="text-left p-4">Actions</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {users.map((user) => (
+                <tr
+                  key={user.user_id}
+                  className="border-b hover:bg-gray-50 transition"
+                >
+                  <td className="p-4">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full bg-orange-500 text-white flex items-center justify-center font-bold">
+                        {user.username.charAt(0).toUpperCase()}
+                      </div>
+
+                      <div>
+                        <p className="font-semibold">{user.username}</p>
+                        <p className="text-sm text-gray-500">
+                          ID: {user.user_id}
+                        </p>
+                      </div>
+                    </div>
+                  </td>
+
+                  <td className="p-4">{user.email}</td>
+
+                  <td className="p-4">
+                    <span
+                      className={`px-3 py-1 rounded-full text-sm ${user.role === "admin"
+                          ? "bg-purple-100 text-purple-700"
+                          : "bg-blue-100 text-blue-700"
+                        }`}
+                    >
+                      {user.role}
+                    </span>
+                  </td>
+
+                  <td className="p-4">
+                    <span
+                      className={`px-3 py-1 rounded-full text-sm ${user.status === "accepted"
+                          ? "bg-green-100 text-green-700"
+                          : "bg-red-100 text-red-700"
+                        }`}
+                    >
+                      {user.status}
+                    </span>
+                  </td>
+
+                  <td className="p-4">
+                    <button className="text-red-600 hover:text-red-800">
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
 
       </div>
 
