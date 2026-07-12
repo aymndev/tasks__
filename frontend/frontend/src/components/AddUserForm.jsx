@@ -2,7 +2,7 @@ import { useState } from "react";
 import { addUser } from "../services/admin";
 
 
-export default function AddUserForm({ closeForm }) {
+export default function AddUserForm({ closeForm ,refreshUsers}) {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -15,7 +15,9 @@ export default function AddUserForm({ closeForm }) {
                 email,
                 password,
                 role,
-            })
+            });
+            await refreshUsers();
+            
             alert("User created!");
             closeForm();
         } catch (err) {

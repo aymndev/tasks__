@@ -23,19 +23,18 @@ export default function Dashboard() {
     pandingUsers: 0,
     activeUsers: 0,
   })
-  useEffect(() => {
-    async function loadUsers() {
-      try {
-        const response = await getAllUsers();
-        setUsers(response.data);
-
-      } catch (err) {
-        console.log(err);
-      }
-
+  async function loadUsers() {
+    try {
+      const response = await getAllUsers();
+      setUsers(response.data);
+    } catch (err) {
+      console.log(err);
     }
+  }
+
+  useEffect(() => {
     loadUsers();
-  }, [])
+  }, []);
   useEffect(() => {
     async function loadState() {
       const response = await getStatistics();
@@ -69,6 +68,7 @@ export default function Dashboard() {
               <div className="fixed inset-0 flex items-center justify-center bg-black/50  z-50 ">
                 <AddUserForm
                   closeForm={() => setShowForm(false)}
+                  refreshUsers={loadUsers}
 
                 />
               </div>
@@ -199,8 +199,8 @@ export default function Dashboard() {
                   <td className="p-4">
                     <span
                       className={`px-3 py-1 rounded-full text-sm ${user.role === "admin"
-                          ? "bg-purple-100 text-purple-700"
-                          : "bg-blue-100 text-blue-700"
+                        ? "bg-purple-100 text-purple-700"
+                        : "bg-blue-100 text-blue-700"
                         }`}
                     >
                       {user.role}
@@ -210,8 +210,8 @@ export default function Dashboard() {
                   <td className="p-4">
                     <span
                       className={`px-3 py-1 rounded-full text-sm ${user.status === "accepted"
-                          ? "bg-green-100 text-green-700"
-                          : "bg-red-100 text-red-700"
+                        ? "bg-green-100 text-green-700"
+                        : "bg-red-100 text-red-700"
                         }`}
                     >
                       {user.status}
