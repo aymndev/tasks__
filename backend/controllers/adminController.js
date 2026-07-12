@@ -119,7 +119,16 @@ async function getStatistics(req, res) {
     }
 
 }
-async function getAllUsers(){
+async function getAllUsers(req,res){
+    try{
+        const sql="SELECT * FROM User";
+        const [result]= await db.query(sql);
+        return res.json(result);
+    }catch(err){
+        return res.status(500).json({
+            massage:err.massage
+        })
+    }
     
 }
 async function addUser(req, res) {
@@ -157,6 +166,7 @@ module.exports = {
     rejectUser,
     acceptUser,
     getStatistics,
-    addUser
+    addUser,
+    getAllUsers
 
 }
