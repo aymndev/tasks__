@@ -119,6 +119,9 @@ async function getStatistics(req, res) {
     }
 
 }
+async function getAllUsers(){
+    
+}
 async function addUser(req, res) {
     try {
         const { username, email, password, role } = req.body;
