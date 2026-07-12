@@ -6,27 +6,29 @@ import { getStatistics } from "../../services/auth";
 import NavBare from "../../components/NavBar"
 import { useNavigate } from "react-router-dom";
 import AddUserForm from "../../components/AddUserForm";
+import { CiSearch } from "react-icons/ci";
 import { useEffect, useState } from "react";
 import { IoMdAdd } from "react-icons/io";
 import AddUser from "./AddUser";
 
 
 export default function Dashboard() {
-  const [showForm,setShowForm]=useState(false);
-  const navigate =useNavigate();
+  const [showForm, setShowForm] = useState(false);
+  const [selected, setSelected] = useState('all');
+  const navigate = useNavigate();
   const [stats, setState] = useState({
     totalUsers: 0,
     pandingUsers: 0,
     activeUsers: 0,
   })
-  useEffect(()=>{
+  useEffect(() => {
     async function loadState() {
-      const response= await getStatistics();
+      const response = await getStatistics();
       setState(response.data)
-      
+
     }
     loadState();
-  },[]);
+  }, []);
   return (
     <div className='flex flex-col font-serif w-full    bg-orange-100 h-screen   '>
       <div className="mb-9">
@@ -41,21 +43,21 @@ export default function Dashboard() {
           </div>
 
           <div className=''>
-            <button 
-            className='flex font-serif bg-orange-800  rounded-lg text-white p-2 pr-6 '
-            onClick={()=>setShowForm(!showForm)}
+            <button
+              className='flex font-serif bg-orange-800  rounded-lg text-white p-2 pr-6 '
+              onClick={() => setShowForm(!showForm)}
 
             >
-              <IoMdAdd  className="h-6 mr-3"/>Add user
-              </button>
-              {showForm&&(
-                <div className="fixed inset-0 flex items-center justify-center bg-black/50  z-50 ">
+              <IoMdAdd className="h-6 mr-3" />Add user
+            </button>
+            {showForm && (
+              <div className="fixed inset-0 flex items-center justify-center bg-black/50  z-50 ">
                 <AddUserForm
-                closeForm={()=>setShowForm(false)}
-                
+                  closeForm={() => setShowForm(false)}
+
                 />
-                </div>
-              )}
+              </div>
+            )}
 
           </div>
 
@@ -82,7 +84,7 @@ export default function Dashboard() {
           </div>
           <div className='border-1 border-gray-900/50 p-5 rounded-lg w-[10rem] bg-gray-100'>
             <p className='flex ml-1 text-sm font-bold text-orange-500'><GoGraph className="h-5 mr-2 text-xl " />Total tasks</p>
-          
+
             <h1 className='ml-1 text-orange-500 text-xl mt-5'>41</h1>
 
 
@@ -92,24 +94,55 @@ export default function Dashboard() {
 
 
       </div>
-      <div className=" flex  gap-10">
+      <div className=" flex flex-row justify-center pt-25  gap-10">
 
-        <div>
+        <div className="flex   relative w-72">
+          <CiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-xl"/>
+          
           <input
-          placeholder="fand"
-          className="bg-white p-2"
-          
+          type="text"
+            placeholder="Find..."
+            className="w-full bg-white p-2 rounded-lg border pl-10 focus:outline-none focus:ring-2 focus:ring-orange-500"
+
           />
-          
-          
+
+
 
         </div>
-        <div className="flex border rouded bg-gray-200 p-2 gap-5">
-          <button className="border rounded-lg p-1 pl-2 pr-2">All</button>
-          <button className="border rounded-lg p-1 pl-2 pr-2">Active</button>
-          <button className="border rounded-lg p-1 pl-2 pr-2">Suspended</button>
+        <div className="flex w-58  rouded bg-gray-300 rounded-lg  gap-5">
+          <button
+
+            onClick={() => setSelected('all')}
+            className={`rounded-lg p-1 pl-2  pr-2 ${selected ==="all"
+                ? " bg-gray-100 text-black transition-all duration-200"
+                : "hover:bg-gray-100  hover:text-black hover:text-xl  transition-all duration-200"
+              }`}
+
+          >
+            All
+          </button>
+          <button
+            onClick={() => setSelected('Active')}
+            className={`rounded-lg p-1 pl-2 pr-2 ${selected === "Active"
+                ? " bg-gray-100 text-black  transition-all duration-200"
+                : "hover:bg-gray-100  hover:text-black hover:text-xl  transition-all duration-200"
+              }`}
+
+
+          >
+            Active
+          </button>
+          <button
+            onClick={() => setSelected('Suspended')}
+            className={`rounded-lg p-1 pl-2 pr-2 ${selected ==="Suspended"
+                ? " bg-gray-100 text-black  transition-all duration-200"
+                : "hover:bg-gray-100  hover:text-black hover:text-xl  transition-all duration-200"
+              }`}
+          >
+            Suspended
+          </button>
         </div>
-        
+
 
       </div>
 
