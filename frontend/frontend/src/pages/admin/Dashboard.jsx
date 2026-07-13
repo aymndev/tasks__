@@ -38,6 +38,7 @@ export default function Dashboard() {
   useEffect(() => {
     loadUsers();
   }, []);
+
   useEffect(() => {
     async function loadState() {
       const response = await getStatistics();
@@ -51,6 +52,7 @@ export default function Dashboard() {
     try{
       await deleteUser(id);
       alert("User deleted !");
+      loadUsers();
 
     }catch(err){
       console.log(err);
