@@ -9,3 +9,6 @@ export function addUser(data) {
 export function getAllUsers() {
     return axios.get(`${API}/admin/users`);
 }
+export function deleteUser(id) {
+    return axios.delete(`http://localhost:3000/admin/users/${id}`);
+}

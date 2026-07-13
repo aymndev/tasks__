@@ -10,7 +10,10 @@ import { CiSearch } from "react-icons/ci";
 import { useEffect, useState } from "react";
 import { IoMdAdd } from "react-icons/io";
 import AddUser from "./AddUser";
-import { getAllUsers } from "../../services/admin";
+
+import { getAllUsers, deleteUser } from "../../services/admin";
+
+
 
 
 export default function Dashboard() {
@@ -43,6 +46,18 @@ export default function Dashboard() {
     }
     loadState();
   }, []);
+
+  async function handleDelete(id){
+    try{
+      await deleteUser(id);
+      alert("User deleted !");
+
+    }catch(err){
+      console.log(err);
+    }
+
+  }
+
   return (
     <div className='flex flex-col font-serif w-full    bg-orange-100 h-screen   '>
       <div className="mb-9">
@@ -219,7 +234,10 @@ export default function Dashboard() {
                   </td>
 
                   <td className="p-4">
-                    <button className="text-red-600 hover:text-red-800">
+                    <button 
+                    className="text-red-600 hover:text-red-800"
+                    onClick={()=>handleDelete(user.user_id)}
+                    >
                       Delete
                     </button>
                   </td>

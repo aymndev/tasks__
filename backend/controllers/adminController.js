@@ -119,17 +119,17 @@ async function getStatistics(req, res) {
     }
 
 }
-async function getAllUsers(req,res){
-    try{
-        const sql="SELECT * FROM User";
-        const [result]= await db.query(sql);
+async function getAllUsers(req, res) {
+    try {
+        const sql = "SELECT * FROM User";
+        const [result] = await db.query(sql);
         return res.json(result);
-    }catch(err){
+    } catch (err) {
         return res.status(500).json({
-            massage:err.massage
+            massage: err.massage
         })
     }
-    
+
 }
 async function addUser(req, res) {
     try {
@@ -159,6 +159,29 @@ async function addUser(req, res) {
     }
 
 }
+async function DeteleUser(req, res) {
+    try {
+        const {id}=req.params
+        const [result] = await db.query('DELETE  FROM User WHERE user_id=?',[id]);
+        if(result.affectedRows===0){
+            return res.status(404).json({
+                message:"User not found"
+            })
+        }
+        res.status(200).json({
+            message: "The user has been deleted",
+        })
+
+
+    } catch (err) {
+        res.status(500).json({
+            message: err.message
+        })
+
+
+    }
+
+}
 
 module.exports = {
     getPendingUsers,
@@ -167,6 +190,7 @@ module.exports = {
     acceptUser,
     getStatistics,
     addUser,
-    getAllUsers
+    getAllUsers,
+    DeteleUser
 
 }
