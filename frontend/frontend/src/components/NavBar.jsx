@@ -2,9 +2,10 @@ import { IoLogOutOutline } from "react-icons/io5";
 
 import { MdAdminPanelSettings } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+import { FaHouseUser } from "react-icons/fa6";
 
 export default function NavBar() {
-  const user=JSON.parse(localStorage.getItem('user'));
+  const user = JSON.parse(localStorage.getItem('user'));
   console.log(user)
   const navigate = useNavigate()
   function handlingLogout() {
@@ -17,7 +18,23 @@ export default function NavBar() {
       <div className='flex flex-row gap-5 justify-between w-full'>
         <div className="flex flex-row gap-5">
           <h1 className='bonjustify-between w-fullt-bold text-lg  '>Todoliste</h1>
-          <p className='flex border-1 border-orange-900/50  pl-2 pt-1 pr-2 rounded-lg text-[12px] text-center text-orange-500 bg-orange-100'><MdAdminPanelSettings className="h-3 mr-1 mt-1 text-xl " />{user?.role}</p>
+          <p
+            className={`flex border-1 border-orange-900/50  pl-2 pt-1 pr-2 rounded-lg text-[12px] text-center  bg-orange-100' ${user?.role === "admin"
+                ? "bg-orange-100 text-orange-500 border-orange-900/50"
+                : "bg-green-100 text-green-600 border-green-900/50"
+              }
+          `}>
+            {user?.role === "admin" ? (
+
+              <MdAdminPanelSettings className="h-3 mr-1 mt-1 text-xl " />
+            ) : (
+              <FaHouseUser className="h-3 mr-1 mt-[3px]  " />
+
+            )}
+
+
+            {user?.role}
+          </p>
 
         </div>
         <div>
