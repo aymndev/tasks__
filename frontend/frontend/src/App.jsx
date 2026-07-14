@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route ,Navigate} from "react-router-dom";
 import Login from "./pages/login";
 import Tasks from "./pages/user/tasks"
-import AddUser from "./pages/admin/AddUser";
+
 
 
 import Dashboard from "./pages/admin/Dashboard";
@@ -18,7 +18,7 @@ function App() {
         <Route path="/" element={<Navigate to="/login" />} />
         <Route path="/login" element={<Login />} />
         <Route path="/tasks" element={<Tasks />} />
-        <Route path="/admin/add-user" element={<AddUser />} />
+    
       
         <Route path="/admin/dashboard" element={<Dashboard />} />
         <Route

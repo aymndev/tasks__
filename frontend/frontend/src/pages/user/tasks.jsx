@@ -1,7 +1,9 @@
-import React from 'react'
+
 import NavBar from '../../components/NavBar'
+import { useState } from 'react';
 
 export default function tasks() {
+  const [category,setCategory]=useState('work')
   const today = new Date()
   const option = {
     weekday: "long",
@@ -32,21 +34,19 @@ export default function tasks() {
 
           />
           <div className='mt-8 bg-white rounded-xl shadow-md overflow-hidden'>          
-            <table className="w-full">
-            <thead className="bg-gray-100 border-b">
-              <tr>
-                <th className="text-left p-4">Work</th>
-                <th className="text-left p-4">Personal</th>
-                <th className="text-left p-4">Health</th>
-                <th className="text-left p-4">Creative</th>
-                <th className="text-left p-4">Learning</th>
-              </tr>
-            </thead>
+            
+            <select >
+              
+                <option value="Work" className="text-left p-4">Work</option>
+                <option value="Personal" className="text-left p-4">Personal</option>
+                <option value="Health" className="text-left p-4">Health</option>
+                <option value="Creative" className="text-left p-4">Creative</option>
+                <option value="Learning" className="text-left p-4">Learning</option>
+              
+            </select>
 
-            <tbody>
-              {/* Rows go here */}
-            </tbody>
-          </table></div>
+      
+          </div>
 
 
 

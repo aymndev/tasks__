@@ -9,7 +9,7 @@ import AddUserForm from "../../components/AddUserForm";
 import { CiSearch } from "react-icons/ci";
 import { useEffect, useState } from "react";
 import { IoMdAdd } from "react-icons/io";
-import AddUser from "./AddUser";
+
 
 import { getAllUsers, deleteUser } from "../../services/admin";
 
