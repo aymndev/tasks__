@@ -28,17 +28,18 @@ export default function tasks() {
         <div className=' bg-white shadow-xl rounded-t-lg w-[70%] h-[9rem] rounded-xl'>
 
           <input
-            className='bg-white p-3 pr-[20rem] w-full pl-3 border-1 rounded-xl focus:outline-none'
+            className='bg-white text-black p-3 pr-[20rem] w-full pl-3 border-1 rounded-xl focus:outline-none'
             type='text'
+            placeholder='Add a new task...'
 
 
           />
-          <div className='mt-8 bg- h-full rounded-xl  overflow-hidden'>
+          <div className='mt-8  h-full rounded-xl  overflow-hidden'>
 
             <select
               value={category}
               onClick={(e) => setCategory(e.target.value)}
-              className={`border p-2 rounded-md ${category === "Work"
+              className={`border mr-5 ml-5 p-2 rounded-md ${category === "Work"
                   ? "bg-pink-100 text-pink-600"
                   : category === "Personal"
                     ? "bg-green-100 text-green-600"
@@ -58,6 +59,15 @@ export default function tasks() {
               <option value="Learning" >Learning</option>
 
             </select>
+
+
+            <select className='rounded-lg border-1 p-2'>
+              <option>High</option>
+              <option>Medium</option>
+              <option>Low</option>
+            </select>
+
+            <button className='ml-[40rem] bg-gray-300 p-1 rounded-lg pr-3 pl-3'>Add</button>
 
 
           </div>
