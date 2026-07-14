@@ -80,6 +80,11 @@ async function deleteUser(req, res) {
         const { id } = req.params
         const sql = "DELETE FROM User WHERE user_id=?"
         const [result] = await db.query(sql, [id])
+        if(result.affectedRows===0){
+            return res.status(404).json({
+                message:"User not found"
+            })
+        }
         return res.status(200).json({
             message: "User has been deleted successfuly"
         })

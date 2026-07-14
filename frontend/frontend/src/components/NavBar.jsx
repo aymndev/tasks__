@@ -4,9 +4,12 @@ import { MdAdminPanelSettings } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 
 export default function NavBar() {
+  const user=JSON.parse(localStorage.getItem('user'));
+  console.log(user)
   const navigate = useNavigate()
   function handlingLogout() {
     localStorage.removeItem("token");
+    localStorage.removeItem("user");
     navigate("/login")
   }
   return (
@@ -14,7 +17,7 @@ export default function NavBar() {
       <div className='flex flex-row gap-5 justify-between w-full'>
         <div className="flex flex-row gap-5">
           <h1 className='bonjustify-between w-fullt-bold text-lg  '>Todoliste</h1>
-          <p className='flex border-1 border-orange-900/50  pl-2 pt-1 pr-2 rounded-lg text-[12px] text-center text-orange-500 bg-orange-100'><MdAdminPanelSettings className="h-3 mr-1 mt-1 text-xl " />Admin</p>
+          <p className='flex border-1 border-orange-900/50  pl-2 pt-1 pr-2 rounded-lg text-[12px] text-center text-orange-500 bg-orange-100'><MdAdminPanelSettings className="h-3 mr-1 mt-1 text-xl " />{user?.role}</p>
 
         </div>
         <div>

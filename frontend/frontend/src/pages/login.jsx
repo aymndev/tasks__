@@ -25,6 +25,9 @@ export default function Login() {
         });
         console.log(response.data);
         const user = response.data.user;
+        localStorage.setItem("token",response.data.token);
+        localStorage.setItem("user",JSON.stringify(user));
+        console.log(JSON.parse(localStorage.getItem("user")));
         
         if (!user) {
             alert("User not found. Please create a new account.");
