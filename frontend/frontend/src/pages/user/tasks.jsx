@@ -1,9 +1,11 @@
-
+import { useState, useEffect } from 'react';
 import NavBar from '../../components/NavBar'
-import { useState } from 'react';
+
+import { getTask } from '../../services/task';
 
 export default function tasks() {
   const [category, setCategory] = useState('work');
+  const [task,setTask]=useState([]);
   const today = new Date()
   const option = {
     weekday: "long",
@@ -13,6 +15,11 @@ export default function tasks() {
 
   };
   const formattedDate = today.toLocaleDateString("en-GB", option);
+  useEffect(()=>{
+    async function name(params) {
+      
+    }
+  })
 
 
   return (
@@ -24,8 +31,8 @@ export default function tasks() {
 
       <div className='flex pl-[20rem] flex-col flex-1 bg-blue-100 h-full w-full p-10 '>
         <h1 className='tracking-wide text-4xl  md:text-5xl'>Today's Liste </h1>
-        <h1 className=' flex text-lg  pt-4 ] font-medium'>{formattedDate}</h1>
-        <div className=' bg-white shadow-xl rounded-t-lg w-[70%] h-[9rem] rounded-xl'>
+        <h1 className=' flex text-lg  pt-4 mb-[4rem] font-medium'>{formattedDate}</h1>
+        <div className=' bg-white shadow-xl  rounded-t-lg w-[80%] h-[9rem] rounded-xl'>
 
           <input
             className='bg-white text-black p-3 pr-[20rem] w-full pl-3 border-1 rounded-xl focus:outline-none'
@@ -34,11 +41,14 @@ export default function tasks() {
 
 
           />
-          <div className='mt-8  h-full rounded-xl  overflow-hidden'>
+          <div className=' flex justify-between mt-8  h-full rounded-xl  overflow-hidden'>
+            <div>
+
+            
 
             <select
               value={category}
-              onClick={(e) => setCategory(e.target.value)}
+              onChange={(e) => setCategory(e.target.value)}
               className={`border mr-5 ml-5 p-2 rounded-md ${category === "Work"
                   ? "bg-pink-100 text-pink-600"
                   : category === "Personal"
@@ -66,10 +76,18 @@ export default function tasks() {
               <option>Medium</option>
               <option>Low</option>
             </select>
+            </div>
+            <div>
+              <button className='mr-7 hover:bg-gray-600 hover:text-white bg-gray-300 p-1 rounded-lg pr-5  pl-5'>Add</button>
 
-            <button className='ml-[40rem] bg-gray-300 p-1 rounded-lg pr-3 pl-3'>Add</button>
+            </div>
+
+            
 
 
+          </div>
+          <div className='bg-white'>
+            <p>heaire whin i well get the tasks </p>
           </div>
 
 
