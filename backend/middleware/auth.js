@@ -5,15 +5,20 @@ function auth(req,res,next){
 
     
     const token =req.headers.authorization
+        console.log("Authorization:", req.headers.authorization);
     if(!token){
         return res.status(401).json({
             message:"ther is not token"
         })
     }
-    const new_token=token.split(" ")[1];
-    const token_=new_token[1];
-    const decoded=jwt.verify(token_,process.env.JWT_SECRET)
+    const newToken = token.split(" ")[1];
+
+    const decoded = jwt.verify(newToken, process.env.JWT_SECRET);
+    
+
+console.log("Decoded:", decoded);
     req.user=decoded
+
 
     next();
 }catch(err){

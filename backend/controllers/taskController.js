@@ -4,7 +4,7 @@ const db = require("../config/db")
 async function getTask(req, res) {
     try {
         const userId = req.user.userId;
-        const [rows] = await db.query("SELECT * FROM Todo",[userId]);
+        const [rows] = await db.query("SELECT * FROM Task",[userId]);
         
         res.json(rows);
 
@@ -26,7 +26,7 @@ async function removeTask(req, res) {
                 message: "id is missing in URL"
             });
         }
-        const sql = "DELETE FROM Todo WHERE task_id=?";
+        const sql = "DELETE FROM Task WHERE task_id=?";
         const [result] = await db.query(sql, [id]);
         console.log("DELETE RESULT :", result);
         if (result.affectedRows === 0) {
@@ -57,7 +57,7 @@ async function createTask(req, res) {
                 message: "All fields are required."
             })
         }
-        const sql = "INSERT INTO Todo(title,user_id) VALUES (?,?)";
+        const sql = "INSERT INTO Task(title,user_id) VALUES (?,?)";
         const [result] = await db.query(sql, [title, user_id]);
         res.status(201).json({
             message: "Task created successfully",

@@ -9,7 +9,7 @@ export function getTask() {
 
     return axios.get(`${API}/task`,{
         headers:{
-            Authorization:token,
+            Authorization:`Bearer ${token}`
         },
     });
 }
