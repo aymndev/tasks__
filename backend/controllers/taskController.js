@@ -3,19 +3,22 @@ const db = require("../config/db")
 
 async function getTask(req, res) {
     try {
-        const userId = req.user.userId;
-        const [rows] = await db.query("SELECT * FROM Task",[userId]);
-        
+        const userId = req.user.id;
+
+        const [rows] = await db.query(
+            "SELECT * FROM Task WHERE user_id = ?",
+            [userId]
+        );
+
         res.json(rows);
 
     } catch (err) {
-        res.status(500).json(err);
+        console.log(err);
 
-
-
-
+        res.status(500).json({
+            error: err.message
+        });
     }
-
 }
 async function removeTask(req, res) {
     try {
