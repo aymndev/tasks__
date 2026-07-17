@@ -38,7 +38,7 @@ export default function tasks() {
 
   return (
 
-    <div className='flex flex-col min-h-screen'>
+    <div className='flex flex-col  min-h-screen'>
 
       <NavBar />
 
@@ -100,23 +100,31 @@ export default function tasks() {
 
 
           </div>
-          <div className='bg-white text-black rounded-lg   shadow-xl'>
+          <div className=' text-black rounded-lg   shadow-xl'>
             {task.map((item) => (
 
-              <div className='flex flex-row gap-1  ' key={item.task_id}>
-                {item.completes ? (
-                  <FaCheckCircle className="text-green-600 h-9 text-xl" />
+              <div className='flex flex-row  ' key={item.task_id}>
 
-                ) : (
-                  <FaRegCircle className="text-gray-500 text-sm h-8 ml-1 mr-1" />
+                <div className='flex  bg-white shadow-xl p-3  mt-5 rounded-lg w-full  flex-col '>
+                  <div className='flex flex-row gap-3'>
+                    {item.completes ? (
+                      <FaCheckCircle className="text-green-600 h-9 text-xl" />
 
-                )
+                    ) : (
+                      <FaRegCircle className="text-gray-500 text-xl text-sm h-7 ml-1 mr-1" />
 
-                }
-                <div>
-                  <p className='text-lg  '>{item.title}</p>
-                  <button className='bg-orange-500 rounded-lg'>Work</button>
-                  
+                    )
+
+                    }
+                    <p className='text-lg  '>{item.title}</p>
+                  </div>
+                  <div className='flex flex-row gap-5 justify-between mt-2'>
+                    <button className='border rounded-lg pl-3 pr-3'>Work</button>
+                    <p className='text-sm text-gray-500'>{new Date(item.created_at).toDateString()}</p>
+
+
+                  </div>
+
 
                 </div>
 
