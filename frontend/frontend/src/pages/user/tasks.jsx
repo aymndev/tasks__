@@ -7,7 +7,7 @@ import { getTask } from '../../services/task';
 export default function tasks() {
   const [category, setCategory] = useState('work');
   const [task, setTask] = useState([]);
-  const [click,setClick]=useState();
+  const [click, setClick] = useState();
   const today = new Date()
   const option = {
     weekday: "long",
@@ -36,6 +36,15 @@ export default function tasks() {
     fetchTasks();
   }, []);
 
+  function toggleTask(id) {
+    setTask(
+      task.map((item) =>
+        item.task_id === id
+          ? { ...item, completed: !item.completed }
+          : item
+      )
+    );
+  }
 
   return (
 
@@ -109,19 +118,31 @@ export default function tasks() {
                 <div className='flex  bg-white shadow-xl p-3 border-b-1 mt-5 rounded-lg w-full  flex-col '>
                   <div className='flex flex-row gap-3'>
                     {item.completed ? (
-                      <FaCheckCircle className="text-green-600 h-9 text-xl" />
+                      <FaCheckCircle onClick={() => toggleTask(item.task_id)}
+                        className="text-green-600  text-xl text-sm h-7 ml-1 mr-1" />
 
                     ) : (
-                      <FaRegCircle className="text-gray-500 text-xl text-sm h-7 ml-1 mr-1" />
+                      <FaRegCircle
+                        onClick={() => toggleTask(item.task_id)}
+                        className="text-gray-500 text-xl text-sm h-7 ml-1 mr-1" />
 
                     )
 
                     }
-                    <p className='text-lg  '>{item.title}</p>
+                    <p
+                      className={`text-xl text-black ${item.completed
+                          ? "line-through text-gray-400"
+                          : "text-black"
+                        }`}
+
+                    >{item.title}</p>
                   </div>
                   <div className='flex flex-row gap-5 justify-between mt-2'>
                     <button className='border rounded-lg pl-3 pr-3'>Work</button>
-                    <p className='text-sm text-gray-500'>{new Date(item.created_at).toDateString()}</p>
+                    <p className='text-sm text-gray-500'
+
+                    >
+                      {new Date(item.created_at).toDateString()}</p>
 
 
                   </div>
