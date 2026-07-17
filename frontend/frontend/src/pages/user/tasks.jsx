@@ -7,7 +7,7 @@ import { getTask } from '../../services/task';
 export default function tasks() {
   const [category, setCategory] = useState('work');
   const [task, setTask] = useState([]);
-  const [click,setClick]=useState()
+  const [click,setClick]=useState();
   const today = new Date()
   const option = {
     weekday: "long",
