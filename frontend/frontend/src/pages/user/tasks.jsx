@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import NavBar from '../../components/NavBar'
 import { FaRegCircle, FaCheckCircle } from "react-icons/fa";
-
+import { completeTask } from '../../services/task';
 import { getTask } from '../../services/task';
 
 export default function tasks() {
@@ -44,6 +44,16 @@ export default function tasks() {
           : item
       )
     );
+  }
+  async function handleComplete(id){
+    try{
+      await completeTask(id);
+      const response=await getTask();
+      setTask(response.data)
+    }catch(err){
+      console.log(err)
+    }
+
   }
 
   return (
@@ -118,12 +128,12 @@ export default function tasks() {
                 <div className='flex  bg-white shadow-xl p-3 border-b-1 mt-5 rounded-lg w-full  flex-col '>
                   <div className='flex flex-row gap-3'>
                     {item.completed ? (
-                      <FaCheckCircle onClick={() => toggleTask(item.task_id)}
+                      <FaCheckCircle  onClick={() => handleComplete(item.task_id)}
                         className="text-green-600  text-xl text-sm h-7 ml-1 mr-1" />
 
                     ) : (
                       <FaRegCircle
-                        onClick={() => toggleTask(item.task_id)}
+                         onClick={() => handleComplete(item.task_id)}
                         className="text-gray-500 text-xl text-sm h-7 ml-1 mr-1" />
 
                     )
