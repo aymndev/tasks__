@@ -7,6 +7,7 @@ import { getTask } from '../../services/task';
 export default function tasks() {
   const [category, setCategory] = useState('work');
   const [task, setTask] = useState([]);
+  const [click,setClick]=useState()
   const today = new Date()
   const option = {
     weekday: "long",
@@ -46,7 +47,7 @@ export default function tasks() {
       <div className='flex pl-[20rem] flex-col flex-1 bg-blue-100 h-full w-full p-10 '>
         <h1 className='tracking-wide text-4xl  md:text-5xl'>Today's Liste </h1>
         <h1 className=' flex text-lg  pt-4 mb-[4rem] font-medium'>{formattedDate}</h1>
-        <div className=' bg-white shadow-xl  rounded-t-lg w-[80%] h-[9rem] rounded-xl'>
+        <div className=' bg-white shadow-xl  w-[80%] mt-9 rounded-xl '>
 
           <input
             className='bg-white text-black p-3 pr-[20rem] w-full pl-3 border-1 rounded-xl focus:outline-none'
@@ -105,9 +106,9 @@ export default function tasks() {
 
               <div className='flex flex-row  ' key={item.task_id}>
 
-                <div className='flex  bg-white shadow-xl p-3  mt-5 rounded-lg w-full  flex-col '>
+                <div className='flex  bg-white shadow-xl p-3 border-b-1 mt-5 rounded-lg w-full  flex-col '>
                   <div className='flex flex-row gap-3'>
-                    {item.completes ? (
+                    {item.completed ? (
                       <FaCheckCircle className="text-green-600 h-9 text-xl" />
 
                     ) : (
