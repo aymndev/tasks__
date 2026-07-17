@@ -13,3 +13,16 @@ export function getTask() {
         },
     });
 }
+export function completeTask(id) {
+    const token = localStorage.getItem("token");
+
+    return axios.put(
+        `${API}/task/${id}`,
+        {},
+        {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        }
+    );
+}
