@@ -1,11 +1,11 @@
 
-const db = require("../config/db")
+const { connection } = require("../config/db")
 
 async function getTask(req, res) {
     try {
         const userId = req.user.id;
 
-        const [rows] = await db.query(
+        const [rows] = await connection.query(
             "SELECT * FROM Task WHERE user_id = ?",
             [userId]
         );
@@ -30,7 +30,7 @@ async function removeTask(req, res) {
             });
         }
         const sql = "DELETE FROM Task WHERE task_id=?";
-        const [result] = await db.query(sql, [id]);
+        const [result] = await connection.query(sql, [id]);
         console.log("DELETE RESULT :", result);
         if (result.affectedRows === 0) {
             return res.status(404).json({
@@ -61,7 +61,7 @@ async function createTask(req, res) {
             })
         }
         const sql = "INSERT INTO Task(title,user_id) VALUES (?,?)";
-        const [result] = await db.query(sql, [title, user_id]);
+        const [result] = await connection.query(sql, [title, user_id]);
         res.status(201).json({
             message: "Task created successfully",
             id: result.insertId

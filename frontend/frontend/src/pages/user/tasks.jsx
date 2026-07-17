@@ -99,7 +99,7 @@ export default function tasks() {
 
 
           </div>
-          <div className='bg-white'>
+          <div className='bg-white text-black'>
             {task.map((item)=>(
               <div key={item.task_id}>
                 <p>{item.title}</p>
