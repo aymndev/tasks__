@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import NavBar from '../../components/NavBar'
+import { FaRegCircle, FaCheckCircle } from "react-icons/fa";
 
 import { getTask } from '../../services/task';
 
@@ -27,7 +28,7 @@ export default function tasks() {
         console.error(err);
 
       }
-      
+
 
 
     }
@@ -99,10 +100,28 @@ export default function tasks() {
 
 
           </div>
-          <div className='bg-white text-black'>
-            {task.map((item)=>(
-              <div key={item.task_id}>
-                <p>{item.title}</p>
+          <div className='bg-white text-black rounded-lg   shadow-xl'>
+            {task.map((item) => (
+
+              <div className='flex flex-row gap-1  ' key={item.task_id}>
+                {item.completes ? (
+                  <FaCheckCircle className="text-green-600 h-9 text-xl" />
+
+                ) : (
+                  <FaRegCircle className="text-gray-500 text-sm h-8 ml-1 mr-1" />
+
+                )
+
+                }
+                <div>
+                  <p className='text-lg  '>{item.title}</p>
+                  <button className='bg-orange-500 rounded-lg'>Work</button>
+                  
+
+                </div>
+
+
+
 
               </div>
             ))}
