@@ -15,11 +15,12 @@ export default function NavBar() {
     navigate("/login")
   }
   return (
-    <div className={`flex font-serif    border-b-1 pt-5 pb-5 pr-10 pl-10 ${user?.role === "admin"
+    <div className={`flex font-serif     border-b-1 pt-5 pb-5 pr-10 pl-10 ${
+      user?.role === "admin"
       ?"bg-orange-100"
-      :"bg-green-100"
+      :"bg-gradient-to-r from-black from-[50%] to-green-800 to-[50%]"
     } `}>
-      <div className='flex flex-row gap-5 justify-between w-full'>
+      <div className='flex flex-row gap-5 text-white justify-between w-full'>
         <div className="flex flex-row gap-5">
           <h1 className='bonjustify-between w-fullt-bold text-lg  '>Todoliste</h1>
           <p
