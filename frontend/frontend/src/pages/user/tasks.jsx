@@ -63,10 +63,10 @@ export default function tasks() {
       <NavBar />
 
 
-      <div className='flex pl-[20rem] flex-col flex-1 bg-blue-100 h-full w-full p-10 '>
+      <div className='flex pl-[20rem] flex-col flex-1 bg-green-900 text-white min-h-screen  w-full p-10 border-1 '>
         <h1 className='tracking-wide text-4xl  md:text-5xl'>Today's Liste </h1>
         <h1 className=' flex text-lg  pt-4 mb-[4rem] font-medium'>{formattedDate}</h1>
-        <div className=' bg-white shadow-xl  w-[80%] mt-9 rounded-xl '>
+        <div className=' bg-white shadow-xl  w-[80%] mt-5 min-h-[10rem] rounded-xl '>
 
           <input
             className='bg-white text-black p-3 pr-[20rem] w-full pl-3 border-1 rounded-xl focus:outline-none'
@@ -75,8 +75,8 @@ export default function tasks() {
 
 
           />
-          <div className=' flex justify-between mt-8  h-full rounded-xl  overflow-hidden'>
-            <div>
+          <div className=' flex  mt-8   rounded-xl  overflow-hidden'>
+            <div className='text-black'>
 
 
 
@@ -120,12 +120,12 @@ export default function tasks() {
 
 
           </div>
-          <div className=' text-black rounded-lg   shadow-xl'>
+          <div className=' flex flex-col gap-5 mt-[9rem] text-black rounded-lg   shadow-xl'>
             {task.map((item) => (
 
-              <div className='flex flex-row  ' key={item.task_id}>
+              <div className='flex flex-row gap-[12rem] ' key={item.task_id}>
 
-                <div className='flex  bg-white shadow-xl p-3 border-b-1 mt-5 rounded-lg w-full  flex-col '>
+                <div className='flex  bg-white shadow-xl p-3  mt-5 rounded-xl w-full  flex-col '>
                   <div className='flex flex-row gap-3'>
                     {item.completed ? (
                       <FaCheckCircle  onClick={() => handleComplete(item.task_id)}
