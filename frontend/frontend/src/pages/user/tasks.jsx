@@ -45,12 +45,12 @@ export default function tasks() {
       )
     );
   }
-  async function handleComplete(id){
-    try{
+  async function handleComplete(id) {
+    try {
       await completeTask(id);
-      const response=await getTask();
+      const response = await getTask();
       setTask(response.data)
-    }catch(err){
+    } catch (err) {
       console.log(err)
     }
 
@@ -63,19 +63,19 @@ export default function tasks() {
       <NavBar />
 
 
-      <div className='flex pl-[20rem] flex-col flex-1 bg-green-900 text-white min-h-screen  w-full p-10 border-1 '>
+      <div className='flex pl-[20rem] flex-col flex-1 bg-green-900 text-white min-h-screen  w-full p-10  '>
         <h1 className='tracking-wide text-4xl  md:text-5xl'>Today's Liste </h1>
         <h1 className=' flex text-lg  pt-4 mb-[4rem] font-medium'>{formattedDate}</h1>
         <div className=' bg-white shadow-xl  w-[80%] mt-5 min-h-[10rem] rounded-xl '>
 
           <input
-            className='bg-white text-black p-3 pr-[20rem] w-full pl-3 border-1 rounded-xl focus:outline-none'
+            className='bg-white text-black p-3 pr-[20rem] w-full pl-3 shadow-xl rounded-lg focus:outline-none'
             type='text'
             placeholder='Add a new task...'
 
 
           />
-          <div className=' flex  mt-8   rounded-xl  overflow-hidden'>
+          <div className=' flex justify-between  mt-8   rounded-xl  overflow-hidden'>
             <div className='text-black'>
 
 
@@ -120,58 +120,59 @@ export default function tasks() {
 
 
           </div>
-          <div className=' flex flex-col gap-5 mt-[9rem] text-black rounded-lg   shadow-xl'>
-            {task.map((item) => (
+        </div>
+        <div className=' flex flex-col gap-5 mt-[8rem]  text-black rounded-lg   shadow-xl'>
+          {task.map((item) => (
 
-              <div className='flex flex-row gap-[12rem] ' key={item.task_id}>
+            <div className='flex flex-row gap-[12rem] w-[68rem] ' key={item.task_id}>
 
-                <div className='flex  bg-white shadow-xl p-3  mt-5 rounded-xl w-full  flex-col '>
-                  <div className='flex flex-row gap-3'>
-                    {item.completed ? (
-                      <FaCheckCircle  onClick={() => handleComplete(item.task_id)}
-                        className="text-green-600  text-xl text-sm h-7 ml-1 mr-1" />
+              <div className='flex  bg-white shadow-xl p-3  mt-5 rounded-xl w-[70rem]  flex-col '>
+                <div className='flex flex-row gap-3'>
+                  {item.completed ? (
+                    <FaCheckCircle onClick={() => handleComplete(item.task_id)}
+                      className="text-green-600  text-xl text-sm h-7 ml-1 mr-1" />
 
-                    ) : (
-                      <FaRegCircle
-                         onClick={() => handleComplete(item.task_id)}
-                        className="text-gray-500 text-xl text-sm h-7 ml-1 mr-1" />
+                  ) : (
+                    <FaRegCircle
+                      onClick={() => handleComplete(item.task_id)}
+                      className="text-gray-500 text-xl text-sm h-7 ml-1 mr-1" />
 
-                    )
+                  )
 
-                    }
-                    <p
-                      className={`text-xl text-black ${item.completed
-                          ? "line-through text-gray-400"
-                          : "text-black"
-                        }`}
+                  }
+                  <p
+                    className={`text-xl text-black ${item.completed
+                      ? "line-through text-gray-400"
+                      : "text-black"
+                      }`}
 
-                    >{item.title}</p>
-                  </div>
-                  <div className='flex flex-row gap-5 justify-between mt-2'>
-                    <button className='border rounded-lg pl-3 pr-3'>Work</button>
-                    <p className='text-sm text-gray-500'
+                  >{item.title}</p>
+                </div>
+                <div className='flex flex-row gap-5 justify-between mt-2'>
+                  <button className='border rounded-lg pl-3 pr-3'>Work</button>
+                  <p className='text-sm text-gray-500'
 
-                    >
-                      {new Date(item.created_at).toDateString()}</p>
-
-
-                  </div>
+                  >
+                    {new Date(item.created_at).toDateString()}</p>
 
 
                 </div>
 
 
-
-
               </div>
-            ))}
-          </div>
 
 
 
 
-
+            </div>
+          ))}
         </div>
+
+
+
+
+
+
       </div>
 
     </div>
