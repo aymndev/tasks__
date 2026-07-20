@@ -8,17 +8,17 @@ import { CiUser } from "react-icons/ci";
 export default function NavBar() {
   const user = JSON.parse(localStorage.getItem('user'));
   console.log(user)
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   function handlingLogout() {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     navigate("/login")
   }
   return (
-    <div className={`flex font-serif     border-b-1 pt-5 pb-5 pr-10 pl-10 ${
+    <div className={`flex font-serif  pt-5 pb-5 pr-10 pl-10 ${
       user?.role === "admin"
-      ?"bg-orange-100"
-      :"bg-gradient-to-r from-black from-[50%] to-green-800 to-[50%]"
+      ?" bg-gradient-to-r from-orange-900 to-orange-200"
+      :"bg-gradient-to-r from-green-800  to-green-600 "
     } `}>
       <div className='flex flex-row gap-5 text-white justify-between w-full'>
         <div className="flex flex-row gap-5">

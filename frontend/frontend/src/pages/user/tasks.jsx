@@ -45,16 +45,22 @@ export default function tasks() {
       )
     );
   }
-  async function handleComplete(id) {
-    try {
-      await completeTask(id);
-      const response = await getTask();
-      setTask(response.data)
-    } catch (err) {
-      console.log(err)
-    }
 
+  async function handleComplete(id) {
+  setTask((prev) =>
+    prev.map((item) =>
+      item.task_id === id
+        ? { ...item, completed: !item.completed }
+        : item
+    )
+  );
+
+  try {
+    await completeTask(id);
+  } catch (err) {
+    console.log(err);
   }
+}
 
   return (
 
@@ -112,7 +118,7 @@ export default function tasks() {
               </select>
             </div>
             <div>
-              <button className='mr-7 hover:bg-gray-600 hover:text-white bg-gray-300 p-1 rounded-lg pr-5  pl-5'>Add</button>
+              <button className='mr-7 hover:bg-gray-900 hover:text-white bg-gray-700 p-1 rounded-lg pr-5  pl-5'>Add</button>
 
             </div>
 
