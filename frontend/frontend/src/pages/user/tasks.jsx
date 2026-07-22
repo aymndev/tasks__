@@ -50,7 +50,7 @@ export default function tasks() {
   setTask((prev) =>
     prev.map((item) =>
       item.task_id === id
-        ? { ...item, completed: !item.completed }
+        ? { ...item, completed: true}
         : item
     )
   );
