@@ -23,7 +23,7 @@ async function getTask(req, res) {
 async function updateTask(req, res) {
     try {
         const { id } = req.params;
-        const sql = "UPDATE FROM Task SET completed=TRUE WHERE user_id=?";
+        const sql = "UPDATE  Task SET completed= TRUE WHERE task_id= ? ";
 
         await connection.query(sql, [id]);
         res.json({

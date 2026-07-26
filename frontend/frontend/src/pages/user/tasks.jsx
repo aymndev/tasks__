@@ -47,20 +47,22 @@ export default function tasks() {
   }
 
   async function handleComplete(id) {
-  setTask((prev) =>
-    prev.map((item) =>
-      item.task_id === id
-        ? { ...item, completed: true}
-        : item
-    )
-  );
+    console.log("Clicked task:", id);
+    setTask((prev) =>
+      prev.map((item) =>
+        item.task_id === id
+          ? { ...item, completed: true }
+          : item
+      )
+    );
 
-  try {
-    await completeTask(id);
-  } catch (err) {
-    console.log(err);
+    try {
+      await completeTask(id);
+
+    } catch (err) {
+      console.log(err);
+    }
   }
-}
 
   return (
 
