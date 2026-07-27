@@ -20,6 +20,22 @@ async function getTask(req, res) {
         });
     }
 }
+async function  searchTask(req,res){
+    try{
+        const {q}=req.body;
+        const sql ="SELECT * FROM Task WHERE title like ?";
+
+        const [rows]=await connection.query(sql,[`%${q}%`]);
+        res.json(rows);
+
+
+    }catch(err){
+        res.status(500).json({
+            error: err.message
+        });
+
+    }
+}
 async function updateTask(req, res) {
     try {
         const { id } = req.params;
@@ -93,7 +109,6 @@ module.exports = {
     getTask,
     removeTask,
     createTask,
-    updateTask
-    
-
-}
+    updateTask,
+    searchTask
+};

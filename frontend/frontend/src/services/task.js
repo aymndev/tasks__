@@ -26,3 +26,14 @@ export function completeTask(id) {
         }
     );
 }
+
+export function searchTask(q) {
+    const token = localStorage.getItem("token");
+
+    return axios.get(`${API}/task/search`, {
+        params: { q },
+        headers: {
+            Authorization: `Bearer ${token}`,
+        }
+    });
+}
