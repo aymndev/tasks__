@@ -1,56 +1,95 @@
 # 📋 Task Management System
 
-A full-stack Task Management System built with **React**, **Node.js**, **Express**, and **MySQL**. The application allows users to manage their daily tasks while providing an admin dashboard to manage user accounts.
+A full-stack **Task Management System** built with **React**, **Node.js**, **Express.js**, and **MySQL**.
+
+The application allows users to manage their daily tasks securely, while providing an admin dashboard for managing users, accounts, and system statistics.
 
 ---
 
-## 🚀 Features
+# 🚀 Features
 
-### 👤 User
+## 👤 User Features
 
 * Register a new account
-* Log in securely
+* Secure login authentication
 * View personal tasks
 * Create new tasks
 * Update tasks
 * Delete tasks
 * Mark tasks as completed
-
-### 🛠️ Admin
-
-* View all users
-* Add new users
-* Accept or reject pending user registrations
-* Delete users
-* View dashboard statistics
-* Manage user accounts
+* Search tasks
+* Protected user routes
 
 ---
 
-## 🛠️ Tech Stack
+## 🛠️ Admin Features
 
-### Frontend
+* Admin authentication
+* View all users
+* Add new users
+* Accept or reject pending registrations
+* Delete users
+* Manage user accounts
+* View dashboard statistics
+* Monitor system activity
+
+---
+
+# 🖼️ Screenshots
+
+Add your screenshots inside the `screenshots` folder.
+
+Example:
+
+```
+screenshots/
+├── login.png
+├── user-dashboard.png
+└── admin-dashboard.png
+```
+
+Then add them here:
+
+### Login Page
+
+![Login](screenshots/login.png)
+
+### User Dashboard
+
+![User Dashboard](screenshots/user-dashboard.png)
+
+### Admin Dashboard
+
+![Admin Dashboard](screenshots/admin-dashboard.png)
+
+---
+
+# 🛠️ Tech Stack
+
+## Frontend
 
 * React
+* Vite
 * React Router
 * Axios
 * Tailwind CSS
 * React Icons
 
-### Backend
+## Backend
 
 * Node.js
 * Express.js
 * MySQL
+* mysql2
 * bcrypt
 * JSON Web Token (JWT)
 * CORS
 
 ---
 
-## 📁 Project Structure
+# 📁 Project Structure
 
-```text
+```
 Task-Management/
 │
 ├── frontend/
@@ -77,52 +116,50 @@ Task-Management/
 
 ---
 
-## ⚙️ Installation
+# ⚙️ Installation
 
-### 1. Clone the repository
+## 1. Clone the repository
 
 ```bash
 git clone https://github.com/yourusername/task-management.git
 ```
 
-### 2. Install backend dependencies
+---
+
+# Backend Setup
+
+Go to the backend folder:
 
 ```bash
 cd backend
+```
+
+Install dependencies:
+
+```bash
 npm install
 ```
 
-### 3. Install frontend dependencies
+Create a `.env` file:
 
-```bash
-cd ../frontend
-npm install
+```
+PORT=3000
+
+DB_HOST=localhost
+DB_USER=root
+DB_PASSWORD=your_password
+DB_NAME=task_management
+
+JWT_SECRET=your_secret_key
 ```
 
----
-
-## 🗄️ Database
-
-Create a MySQL database and update your database configuration.
-
-Example:
-
-```sql
-CREATE DATABASE task_management;
-```
-
-Then import your database tables.
-
----
-
-## ▶️ Run the Backend
+Run the backend:
 
 ```bash
-cd backend
 npm run dev
 ```
 
-Server runs on:
+Backend server:
 
 ```
 http://localhost:3000
@@ -130,14 +167,27 @@ http://localhost:3000
 
 ---
 
-## ▶️ Run the Frontend
+# Frontend Setup
+
+Open another terminal:
 
 ```bash
 cd frontend
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Start the application:
+
+```bash
 npm run dev
 ```
 
-Application runs on:
+Frontend application:
 
 ```
 http://localhost:5173
@@ -145,63 +195,147 @@ http://localhost:5173
 
 ---
 
-## 📌 API Endpoints
+# 🗄️ Database
 
-### Authentication
+The project uses MySQL.
 
-* POST `/api/auth/register`
-* POST `/api/auth/login`
+Create the database:
 
-### Users
+```sql
+CREATE DATABASE task_management;
+```
 
-* GET `/user`
-* GET `/admin/users`
-* POST `/admin/users`
-* DELETE `/admin/users/:id`
+Main database tables:
 
-### Tasks
+```
+User
+ |
+ |
+ └── Task
+```
 
-* GET `/task`
-* POST `/task`
-* PUT `/task/:id`
-* DELETE `/task/:id`
+Relationship:
+
+```
+One User can have many Tasks
+```
 
 ---
 
-## 📊 Current Features
+# 🔐 Authentication
 
-* User authentication
-* JWT authentication
+The application uses JWT authentication.
+
+Authentication flow:
+
+1. User registers an account.
+2. Password is encrypted using bcrypt.
+3. User logs in with email and password.
+4. Backend generates a JWT token.
+5. Token is stored on the client side.
+6. Protected routes verify the token using authentication middleware.
+
+Protected resources:
+
+* User tasks
+* Admin dashboard
 * User management
-* Task management
-* Dashboard statistics
-* Responsive interface
-* Search UI
-* Modern admin dashboard
 
 ---
 
-## 🔮 Future Improvements
+# 📡 API Endpoints
+
+## Authentication
+
+| Method | Endpoint             | Description   |
+| ------ | -------------------- | ------------- |
+| POST   | `/api/auth/register` | Register user |
+| POST   | `/api/auth/login`    | Login user    |
+
+---
+
+## Tasks
+
+| Method | Endpoint          | Description    |
+| ------ | ----------------- | -------------- |
+| GET    | `/task`           | Get user tasks |
+| POST   | `/task`           | Create task    |
+| PUT    | `/task/:id`       | Update task    |
+| DELETE | `/task/:id`       | Delete task    |
+| GET    | `/task/search?q=` | Search tasks   |
+
+---
+
+## Users / Admin
+
+| Method | Endpoint           | Description        |
+| ------ | ------------------ | ------------------ |
+| GET    | `/admin/users`     | Get all users      |
+| POST   | `/admin/users`     | Add user           |
+| DELETE | `/admin/users/:id` | Delete user        |
+| PUT    | `/admin/users/:id` | Update user status |
+
+---
+
+# 📊 Current Project Status
+
+Implemented:
+
+✅ User authentication
+✅ JWT authorization
+✅ Password encryption
+✅ User management
+✅ Task CRUD operations
+✅ Task completion system
+✅ Search functionality
+✅ Admin dashboard
+✅ Responsive UI
+✅ MySQL database integration
+✅ REST API architecture
+
+---
+
+# 🔮 Future Improvements
 
 * User profile pictures
 * Task categories
-* Due dates
-* Search and filtering
+* Task priorities
+* Due dates and reminders
 * Pagination
+* Advanced search and filtering
 * Email verification
 * Password reset
 * Dark mode
 * Charts and analytics
 * File attachments
+* Real-time notifications
+* Unit and integration testing
 
 ---
 
-## 👨‍💻 Author
+# 📚 What I Learned
+
+During this project, I practiced:
+
+* Building REST APIs with Express.js
+* Connecting React applications with backend services
+* Managing authentication using JWT
+* Encrypting passwords using bcrypt
+* Designing MySQL database relationships
+* Creating reusable React components
+* Managing application state
+* Working with Axios HTTP requests
+* Using Git and GitHub for version control
+* Structuring a full-stack application
+
+---
+
+# 👨‍💻 Author
 
 **Aymane El Mhamdi**
 
 ---
 
-## 📄 License
+# 📄 License
 
 This project is open source and available under the MIT License.

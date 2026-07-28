@@ -3,11 +3,13 @@ import NavBar from '../../components/NavBar'
 import { FaRegCircle, FaCheckCircle } from "react-icons/fa";
 import { completeTask } from '../../services/task';
 import { getTask } from '../../services/task';
+import { searchTask } from '../../services/task';
 
 export default function tasks() {
   const [category, setCategory] = useState('work');
   const [task, setTask] = useState([]);
   const [click, setClick] = useState();
+  const [search,setSearch]=useState("");
   const today = new Date()
   const option = {
     weekday: "long",
@@ -63,6 +65,17 @@ export default function tasks() {
       console.log(err);
     }
   }
+  const handleSearch=async()=>{
+    try{
+      const res= await searchTask(search);
+      setTask(res.data);
+
+
+    }catch(err){
+      console.log(err)
+
+    }
+  }
 
   return (
 
@@ -80,6 +93,8 @@ export default function tasks() {
             className='bg-white text-black p-3 pr-[20rem] w-full pl-3 shadow-xl rounded-lg focus:outline-none'
             type='text'
             placeholder='Add a new task...'
+            value={search}
+            onChange={(e)=>setSearch(e.target.value)}
 
 
           />
@@ -120,7 +135,7 @@ export default function tasks() {
               </select>
             </div>
             <div>
-              <button className='mr-7 hover:bg-gray-900 hover:text-white bg-gray-700 p-1 rounded-lg pr-5  pl-5'>Add</button>
+              <button className='mr-7 hover:bg-gray-900 hover:text-white bg-gray-700 p-1 rounded-lg pr-5  pl-5' onClick={handleSearch}>Add</button>
 
             </div>
 
