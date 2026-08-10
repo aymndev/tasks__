@@ -9,7 +9,7 @@ export default function tasks() {
   const [category, setCategory] = useState('work');
   const [task, setTask] = useState([]);
   const [click, setClick] = useState();
-  const [search,setSearch]=useState("");
+  const [search, setSearch] = useState("");
   const today = new Date()
   const option = {
     weekday: "long",
@@ -65,13 +65,13 @@ export default function tasks() {
       console.log(err);
     }
   }
-  const handleSearch=async()=>{
-    try{
-      const res= await searchTask(search);
+  const handleSearch = async () => {
+    try {
+      const res = await searchTask(search);
       setTask(res.data);
 
 
-    }catch(err){
+    } catch (err) {
       console.log(err)
 
     }
@@ -94,7 +94,7 @@ export default function tasks() {
             type='text'
             placeholder='Add a new task...'
             value={search}
-            onChange={(e)=>setSearch(e.target.value)}
+            onChange={(e) => setSearch(e.target.value)}
 
 
           />
