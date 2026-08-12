@@ -14,7 +14,7 @@ export function getTask() {
 }
 
 export function createTask(data){
-    const token =localStorage.hetItem("token");
+    const token =localStorage.getItem("token");
     return axios.post(
         `${API}/task`,
         data,

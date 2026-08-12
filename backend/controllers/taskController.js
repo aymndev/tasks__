@@ -22,7 +22,7 @@ async function getTask(req, res) {
 }
 async function  searchTask(req,res){
     try{
-        const {q}=req.body;
+        const { q } = req.query;
         const sql ="SELECT * FROM Task WHERE title like ?";
 
         const [rows]=await connection.query(sql,[`%${q}%`]);
@@ -87,21 +87,32 @@ async function removeTask(req, res) {
 
 async function createTask(req, res) {
     try {
-        const { title, user_id } = req.body;
-        if (!title || !user_id) {
+        const { title, category } = req.body;
+        const userId =req.user.id;
+        console.log("BODY:",req.body);
+        console.log("USER ID"),userId
+        if (!title || !category) {
             return res.status(400).json({
                 message: "All fields are required."
             })
         }
-        const sql = "INSERT INTO Task(title,user_id) VALUES (?,?)";
-        const [result] = await connection.query(sql, [title, user_id]);
+        const sql = "INSERT INTO Task(title,user_id,category) VALUES (?,?,?)";
+        const [result] = await connection.query(sql, [title,userId, category]);
         res.status(201).json({
             message: "Task created successfully",
-            id: result.insertId
+            id: result.insertId,
+            title,
+            user_id: userId,
+            category
         });
 
     } catch (err) {
-        res.status(500).json(err);
+        console.error("CREATE TASK ERROR:", err);
+        res.status(500).json({
+            error:err.message
+        });
+
+
 
     }
 }

@@ -7,9 +7,9 @@ import { searchTask } from '../../services/task';
 import { createTask } from '../../services/task';
 
 export default function tasks() {
-  const [category, setCategory] = useState('work');
+  const [category, setCategory] = useState('Work');
   const [task, setTask] = useState([]);
-  const [newTask,setNewTask]=useState("");
+  const [newTask, setNewTask] = useState("");
   const [search, setSearch] = useState("");
   const today = new Date()
   const option = {
@@ -19,20 +19,20 @@ export default function tasks() {
     year: "numeric",
 
   };
-  async function handleTCreateTask(){
-    if(!newTask.trim())return 
-    try{
-      const response= await createTask({
-        title:newTask,
-        category:category
+  async function handleTCreateTask() {
+    if (!newTask.trim()) return
+    try {
+      const response = await createTask({
+        title: newTask,
+        category: category
       });
       console.log("the task created ", response.data);
-      setTask(prev=>[...prev,response.data]);
+      setTask(prev => [...prev, response.data]);
       setNewTask("");
 
 
 
-    }catch(err){
+    } catch (err) {
       console.error("Error creating task:", err);
 
     }
