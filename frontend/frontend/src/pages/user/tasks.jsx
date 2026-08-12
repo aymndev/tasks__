@@ -8,7 +8,7 @@ import { searchTask } from '../../services/task';
 export default function tasks() {
   const [category, setCategory] = useState('work');
   const [task, setTask] = useState([]);
-  const [click, setClick] = useState();
+  const [newTask,setNewTask]=useState("");
   const [search, setSearch] = useState("");
   const today = new Date()
   const option = {
@@ -93,8 +93,8 @@ export default function tasks() {
             className='bg-white text-black p-3 pr-[20rem] w-full pl-3 shadow-xl rounded-lg focus:outline-none'
             type='text'
             placeholder='Add a new task...'
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
+            value={newTask}
+            onChange={(e) => setNewTask(e.target.value)}
 
 
           />
