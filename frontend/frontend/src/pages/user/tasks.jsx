@@ -192,13 +192,13 @@ export default function tasks() {
                 </div>
                 <div className='flex flex-row gap-5 justify-between mt-2'>
                   <button
-                    className={`border rounded-lg pl-3 pr-3 ${category === "Work"
+                    className={`border rounded-lg pl-3 pr-3 ${item.category === "Work"
                       ? "bg-pink-100 text-pink-600"
                       : item.category === "Personal"
                         ? "bg-green-100 text-green-600"
-                        : category === "Health"
+                        : item.category === "Health"
                           ? "bg-red-100 text-red-600"
-                          : category === "Creative"
+                          : item.category === "Creative"
                             ? "bg-blue-100 text-blue-600"
                             : "bg-yellow-100 text-yellow-600"
                       }`}
