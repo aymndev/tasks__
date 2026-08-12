@@ -4,6 +4,7 @@ import { FaRegCircle, FaCheckCircle } from "react-icons/fa";
 import { completeTask } from '../../services/task';
 import { getTask } from '../../services/task';
 import { searchTask } from '../../services/task';
+import { createTask } from '../../services/task';
 
 export default function tasks() {
   const [category, setCategory] = useState('work');
