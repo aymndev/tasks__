@@ -13,9 +13,12 @@ export function getTask() {
     });
 }
 
-export function createTask(){
+export function createTask(data){
     const token =localStorage.hetItem("token");
-    return axios.post(`${API}/task`,{
+    return axios.post(
+        `${API}/task`,
+        data,
+        {
         headers:{
             Authorization:`Bearer ${token}`
         }

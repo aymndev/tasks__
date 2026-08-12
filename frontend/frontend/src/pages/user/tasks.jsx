@@ -19,6 +19,24 @@ export default function tasks() {
     year: "numeric",
 
   };
+  async function handleTCreateTask(){
+    if(!newTask.trim())return 
+    try{
+      const response= await createTask({
+        title:newTask,
+        category:category
+      });
+      console.log("the task created ", response.data);
+      setTask(prev=>[...prev,response.data]);
+      setNewTask("");
+
+
+
+    }catch(err){
+      console.error("Error creating task:", err);
+
+    }
+  }
   const formattedDate = today.toLocaleDateString("en-GB", option);
   useEffect(() => {
     async function fetchTasks() {
@@ -136,7 +154,7 @@ export default function tasks() {
               </select>
             </div>
             <div>
-              <button className='mr-7 hover:bg-gray-900 hover:text-white bg-gray-700 p-1 rounded-lg pr-5  pl-5' onClick={handleSearch}>Add</button>
+              <button className='mr-7 hover:bg-gray-900 hover:text-white bg-gray-700 p-1 rounded-lg pr-5  pl-5' onClick={handleTCreateTask}>Add</button>
 
             </div>
 
