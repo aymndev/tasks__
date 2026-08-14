@@ -66,6 +66,12 @@ export default function tasks() {
       )
     );
   }
+  const handleKeyDown =(e)=>{
+    if(e.key=='Enter') {
+      handleTCreateTask()
+
+    }
+  }
 
   async function handleComplete(id) {
     console.log("Clicked task:", id);
@@ -113,6 +119,7 @@ export default function tasks() {
             type='text'
             placeholder='Add a new task...'
             value={newTask}
+            onKeyDown={handleKeyDown}
             onChange={(e) => setNewTask(e.target.value)}
 
 
