@@ -9,6 +9,7 @@ import { createTask } from '../../services/task';
 export default function tasks() {
   const [category, setCategory] = useState('Work');
   const [task, setTask] = useState([]);
+  const [priority,setPriority]=useState('Medium');
   const [newTask, setNewTask] = useState("");
   const [search, setSearch] = useState("");
   const today = new Date()
@@ -24,7 +25,8 @@ export default function tasks() {
     try {
       const response = await createTask({
         title: newTask,
-        category: category
+        category: category,
+        priority:priority
       });
       console.log("the task created ", response.data);
       setTask(prev => [...prev, response.data]);
@@ -154,7 +156,11 @@ export default function tasks() {
               </select>
 
 
-              <select className='rounded-lg border-1 p-2'>
+              <select 
+              value={priority} className='rounded-lg border-1 p-2'
+              onChange={(e)=>setPriority(e.target.value)}
+              
+              >
                 <option>High</option>
                 <option>Medium</option>
                 <option>Low</option>
@@ -212,6 +218,7 @@ export default function tasks() {
 
 
                   >{item.category}</button>
+                  <button>{item.priority}</button>
                   <p className='text-sm text-gray-500'
 
                   >
