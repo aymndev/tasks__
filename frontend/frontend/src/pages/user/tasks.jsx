@@ -9,7 +9,7 @@ import { createTask } from '../../services/task';
 export default function tasks() {
   const [category, setCategory] = useState('Work');
   const [task, setTask] = useState([]);
-  const [priority,setPriority]=useState('Medium');
+  const [priority, setPriority] = useState('Medium');
   const [newTask, setNewTask] = useState("");
   const [search, setSearch] = useState("");
   const today = new Date()
@@ -20,13 +20,16 @@ export default function tasks() {
     year: "numeric",
 
   };
+  const totaleTasks = task.length;
+  const taskCompleted = task.filter(item => !item.completed).length;
+  const taskNotcompleted = task.filter(item => item.completed).length
   async function handleTCreateTask() {
     if (!newTask.trim()) return
     try {
       const response = await createTask({
         title: newTask,
         category: category,
-        priority:priority
+        priority: priority
       });
       console.log("the task created ", response.data);
       setTask(prev => [...prev, response.data]);
@@ -68,8 +71,8 @@ export default function tasks() {
       )
     );
   }
-  const handleKeyDown =(e)=>{
-    if(e.key=='Enter') {
+  const handleKeyDown = (e) => {
+    if (e.key == 'Enter') {
       handleTCreateTask()
 
     }
@@ -114,6 +117,14 @@ export default function tasks() {
       <div className='flex pl-[20rem] flex-col flex-1 bg-green-900 text-white min-h-screen  w-full p-10  '>
         <h1 className='tracking-wide text-4xl  md:text-5xl'>Today's Liste </h1>
         <h1 className=' flex text-lg  pt-4 mb-[4rem] font-medium'>{formattedDate}</h1>
+        <div className='flex gap-[15rem]  w-[67rem]'>
+          <p className='rounded-lg p-9 border-1 flex'> Totale Tasks :{totaleTasks}</p>
+          <p className='rounded-lg p-9 border-1  '>Tasks not completed :{taskCompleted}</p>
+          <p className='rounded-lg p-9 border-1 '>Task completed : {taskNotcompleted}</p>
+        </div>
+
+
+
         <div className=' bg-white shadow-xl  w-[80%] mt-5 min-h-[10rem] rounded-xl '>
 
           <input
@@ -156,10 +167,10 @@ export default function tasks() {
               </select>
 
 
-              <select 
-              value={priority} className='rounded-lg border-1 p-2'
-              onChange={(e)=>setPriority(e.target.value)}
-              
+              <select
+                value={priority} className='rounded-lg border-1 p-2'
+                onChange={(e) => setPriority(e.target.value)}
+
               >
                 <option>High</option>
                 <option>Medium</option>
@@ -218,7 +229,7 @@ export default function tasks() {
 
 
                   >{item.category}</button>
-                  <button>{item.priority}</button>
+                  <button className='flex  border-1 rounded-lg p-1 mr-[45rem]'>{item.priority}</button>
                   <p className='text-sm text-gray-500'
 
                   >
