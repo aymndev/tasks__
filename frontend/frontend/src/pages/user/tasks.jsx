@@ -5,6 +5,9 @@ import { completeTask } from '../../services/task';
 import { getTask } from '../../services/task';
 import { searchTask } from '../../services/task';
 import { createTask } from '../../services/task';
+import { FaTasks } from "react-icons/fa";
+import { SiGoogletasks } from "react-icons/si";
+import { BiTaskX } from "react-icons/bi";
 
 export default function tasks() {
   const [category, setCategory] = useState('Work');
@@ -118,9 +121,9 @@ export default function tasks() {
         <h1 className='tracking-wide text-4xl  md:text-5xl'>Today's Liste </h1>
         <h1 className=' flex text-lg  pt-4 mb-[4rem] font-medium'>{formattedDate}</h1>
         <div className='flex gap-[15rem]  w-[67rem]'>
-          <p className='rounded-lg p-9 border-1 flex'> Totale Tasks :{totaleTasks}</p>
-          <p className='rounded-lg p-9 border-1  '>Tasks not completed :{taskCompleted}</p>
-          <p className='rounded-lg p-9 border-1 '>Task completed : {taskNotcompleted}</p>
+          <p className='relative rounded-lg p-6 border flex-1 flex items-center justify-center'> <FaTasks className= '  absolute left-6 h-3 w-3 '/>Totale  :{totaleTasks}</p>
+          <p className='relative rounded-lg p-6 border flex-1 flex items-center justify-center  '><BiTaskX className= '  absolute left-6 h-3 w-3  '/> Incomplete :{taskCompleted}</p>
+          <p className='relative rounded-lg p-6 border flex-1 flex items-center justify-center'> <SiGoogletasks className= '  absolute left-6 h-3 w-3 '/>Completed : {taskNotcompleted}</p>
         </div>
 
 
