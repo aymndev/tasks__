@@ -121,7 +121,7 @@ export default function tasks() {
       <div className='flex pl-[20rem] flex-col flex-1 bg-green-900 text-white min-h-screen  w-full p-10  '>
         <h1 className='tracking-wide text-4xl  md:text-5xl'>Today's Liste </h1>
         <h1 className=' flex text-lg  pt-4 mb-[4rem] font-medium'>{formattedDate}</h1>
-        <div className='mb-5'>
+        <div className='flex mb-5 justify-center w-full -translate-x-[12rem]'>
           <Barchart
           completed={taskCompleted}
           pandling={taskNotcompleted}
