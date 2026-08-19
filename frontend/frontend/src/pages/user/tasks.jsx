@@ -129,6 +129,12 @@ export default function tasks() {
             pending={taskNotcompleted}
 
           />
+          <Barchart
+            completed={taskCompleted}
+            pending={taskNotcompleted}
+
+          />
+
         </div>
         <div className='flex gap-[15rem]  w-[67rem]'>
           <p className='relative rounded-lg p-6 border flex-1 flex items-center justify-center'> <FaTasks className='  absolute left-6 h-3 w-3 ' />Totale  :{totaleTasks}</p>

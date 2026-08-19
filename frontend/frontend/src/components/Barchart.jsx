@@ -10,12 +10,12 @@ import {
     ResponsiveContainer
 } from "recharts";
 
-export default function Barchart({ completed, pandling }) {
+export default function Barchart({ completed, pending }) {
     const data =
         [{
             name: 'Tasks',
             completed: completed,
-            pandling: pandling,
+            pending: pending,
         },];
 
     return (
