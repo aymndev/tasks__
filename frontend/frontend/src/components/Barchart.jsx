@@ -11,13 +11,13 @@ import {
 } from "recharts";
 
 export default function Barchart({ completed, pending }) {
-    const data =
-        [{
-            name: 'Tasks',
+    const data = [
+        {
+            name: "Tasks",
             completed: completed,
             pending: pending,
-        },];
-
+        },
+    ];
     return (
         <div className="w-[25rem] h-[290px] border-1 rounded-lg bg-white">
             <ResponsiveContainer width="100%" height="100%">
@@ -29,8 +29,17 @@ export default function Barchart({ completed, pending }) {
                     <Tooltip />
                     <Legend />
 
-                    <Bar dataKey="completed" name="completed" fill="#22c55e" radius={[8, 8, 0, 0]} />
-                    <Bar dataKey="pandling" name="Pendling" fill="#ef4444" radius={[8, 8, 0, 0]} />
+                    <Bar
+                        dataKey="completed"
+                        name="Completed"
+                        fill="#22c55e"
+                    />
+
+                    <Bar
+                        dataKey="pending"
+                        name="Pending"
+                        fill="#ef4444"
+                    />
 
 
 

@@ -129,11 +129,10 @@ export default function tasks() {
             pending={taskNotcompleted}
 
           />
-          <Barchart
-            completed={taskCompleted}
-            pending={taskNotcompleted}
-
-          />
+<Barchart
+  completed={taskCompleted}
+  pending={taskNotcompleted}
+/>
 
         </div>
         <div className='flex gap-[15rem]  w-[67rem]'>
