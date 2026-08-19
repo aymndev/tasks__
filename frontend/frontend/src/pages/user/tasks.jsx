@@ -9,6 +9,7 @@ import { FaTasks } from "react-icons/fa";
 import { SiGoogletasks } from "react-icons/si";
 import { BiTaskX } from "react-icons/bi";
 import Barchart from '../../components/Barchart';
+import PieChartd from '../../components/PieChart';
 
 export default function tasks() {
   const [category, setCategory] = useState('Work');
@@ -122,16 +123,17 @@ export default function tasks() {
         <h1 className='tracking-wide text-4xl  md:text-5xl'>Today's Liste </h1>
         <h1 className=' flex text-lg  pt-4 mb-[4rem] font-medium'>{formattedDate}</h1>
         <div className='flex mb-5 justify-center w-full -translate-x-[12rem]'>
-          <Barchart
-          completed={taskCompleted}
-          pandling={taskNotcompleted}
-          
+
+          <PieChartd
+            completed={taskCompleted}
+            pandling={taskNotcompleted}
+
           />
         </div>
         <div className='flex gap-[15rem]  w-[67rem]'>
-          <p className='relative rounded-lg p-6 border flex-1 flex items-center justify-center'> <FaTasks className= '  absolute left-6 h-3 w-3 '/>Totale  :{totaleTasks}</p>
-          <p className='relative rounded-lg p-6 border flex-1 flex items-center justify-center  '><BiTaskX className= '  absolute left-6 h-3 w-3  '/> Incomplete :{taskCompleted}</p>
-          <p className='relative rounded-lg p-6 border flex-1 flex items-center justify-center'> <SiGoogletasks className= '  absolute left-6 h-3 w-3 '/>Completed : {taskNotcompleted}</p>
+          <p className='relative rounded-lg p-6 border flex-1 flex items-center justify-center'> <FaTasks className='  absolute left-6 h-3 w-3 ' />Totale  :{totaleTasks}</p>
+          <p className='relative rounded-lg p-6 border flex-1 flex items-center justify-center  '><BiTaskX className='  absolute left-6 h-3 w-3  ' /> Incomplete :{taskCompleted}</p>
+          <p className='relative rounded-lg p-6 border flex-1 flex items-center justify-center'> <SiGoogletasks className='  absolute left-6 h-3 w-3 ' />Completed : {taskNotcompleted}</p>
         </div>
 
 
