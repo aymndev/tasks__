@@ -1,52 +1,52 @@
-
 import {
-    BarChart,
-    Bar,
-    XAxis,
-    YAxis,
-    CartesianGrid,
+    Radar,
+    RadarChart,
+    PolarGrid,
+    PolarAngleAxis,
+    PolarRadiusAxis,
+    ResponsiveContainer,
     Tooltip,
-    Legend,
-    ResponsiveContainer
 } from "recharts";
 
-export default function Barchart({ completed, pending }) {
-    const data = [
-        {
-            name: "Tasks",
-            completed: completed,
-            pending: pending,
-        },
-    ];
+
+
+export default function Barchart({
+    Work,
+    Personal,
+    Creative,
+    Health,
+    Learning,
+}) {
+const data = [
+    { category: "Work", value: Work || 0 },
+    { category: "Personal", value: Personal || 0 },
+    { category: "Creative", value: Creative || 0 },
+    { category: "Health", value: Health || 0 },
+    { category: "Learning", value: Learning || 0 },
+];
+
     return (
-        <div className="w-[25rem] h-[290px] border-1 rounded-lg bg-white">
+        <div className=" bg-white w-[30rem] h-[250px]">
             <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={data}>
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="name" />
+                <RadarChart data={data}>
+                    <PolarGrid />
 
-                    <YAxis />
+                    <PolarAngleAxis dataKey="category" />
+
+                    <PolarRadiusAxis />
+
+                    <Radar
+                        name="Tasks"
+                        dataKey="value"
+                        fill="#8884d8"
+                        fillOpacity={0.6}
+                    />
+
                     <Tooltip />
-                    <Legend />
 
-                    <Bar
-                        dataKey="completed"
-                        name="Completed"
-                        fill="#22c55e"
-                    />
-
-                    <Bar
-                        dataKey="pending"
-                        name="Pending"
-                        fill="#ef4444"
-                    />
-
-
-
-                </BarChart>
-
+            
+                </RadarChart>
             </ResponsiveContainer>
-
         </div>
-    )
+    );
 }
