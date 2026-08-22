@@ -14,7 +14,7 @@ const {
 }= require("../controllers/taskController")
 
 router.get("/",auth, getTask);
-router.get('/stats',auth,getTaskCategories)
+router.get('/categories',auth,getTaskCategories)
 router.get("/search",auth,searchTask);
 router.post("/",auth, createTask);
 router.delete("/:id",auth, removeTask);

@@ -53,7 +53,7 @@ export const getTaskStats = async () => {
 
     return axios.get("http://localhost:3000/task/categories", {
         headers: {
-            Authorization: token
+            Authorization: `Bearer ${token}`
         }
     });
 };
