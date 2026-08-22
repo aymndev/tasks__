@@ -48,3 +48,17 @@ export function searchTask(q) {
         }
     });
 }
+export const getTaskStats = async () => {
+    const token = localStorage.getItem("token");
+
+    const response = await axios.get(
+        "http://localhost:3000/task/stats",
+        {
+            headers: {
+                Authorization: token
+            }
+        }
+    );
+
+    return response.data;
+}

@@ -17,6 +17,13 @@ export default function tasks() {
   const [priority, setPriority] = useState('Medium');
   const [newTask, setNewTask] = useState("");
   const [search, setSearch] = useState("");
+  const [stats, setStats] = useState({
+  Work: 0,
+  Personal: 0,
+  Creative: 0,
+  Health: 0,
+  Learning: 0
+});
   const today = new Date()
   const option = {
     weekday: "long",
@@ -130,8 +137,12 @@ export default function tasks() {
 
           />
           <Barchart
-            completed={taskCompleted}
-            pending={taskNotcompleted}
+            Work={stats.Work}
+            Personal={stats.Personal}
+            Creative={stats.Creative}
+            Health={stats.Health}
+            Learning={stats.Learning}
+
           />
 
         </div>
