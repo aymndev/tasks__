@@ -26,18 +26,19 @@ export default function tasks() {
   Learning: 0
 });
 useEffect(() => {
-  async function fetchStats() {
-    try {
-      const response = await getTaskStats();
-      console.log("Stats:", response.data);
+    async function fetchStats() {
+        try {
+            const response = await getTaskStats();
 
-      setStats(response.data);
-    } catch (err) {
-      console.error("Error getting stats:", err);
+            console.log("Stats:", response.data);
+
+            setStats(response.data);
+        } catch (err) {
+            console.error("Error getting stats:", err);
+        }
     }
-  }
 
-  fetchStats();
+    fetchStats();
 }, []);
   const today = new Date()
   const option = {

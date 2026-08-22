@@ -6,6 +6,7 @@ import {
     PolarRadiusAxis,
     ResponsiveContainer,
     Tooltip,
+    LabelList,
 } from "recharts";
 
 
@@ -40,7 +41,10 @@ const data = [
                         dataKey="value"
                         fill="#8884d8"
                         fillOpacity={0.6}
-                    />
+                    >
+                        <LabelList dataKey="value" position="top" />
+                        </Radar>
+
 
                     <Tooltip />
 

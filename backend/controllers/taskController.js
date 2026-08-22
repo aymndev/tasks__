@@ -84,75 +84,80 @@ async function removeTask(req, res) {
     }
 
 }
-async function getTaskCategories(req, res) { }
-try {
-    const userId = req.user_id;
-    const sql = `
-        SELECT category ,COUNT(*) AS totale
-        FROM Task
-        WHERE user_id=?
-        GROUP BY category
-        
-        `
-    const [rows] = await connection.query(sql, [userId]);
-    const stats = {
-        Work: 0,
-        Personal: 0,
-        Creative: 0,
-        Health: 0,
-        Learning: 0
-    }
-    rows.forEach(row => {
-        if (stats.hasOwnProperty(row.category)) {
-            stats[row.category] = row.totale;
-        }
-    })
-    res.json(stats);
-}
-
-
-
-
-catch (err) {
-    console.error("GET TASK STATS ERROR:", err);
-    res.status(500).json({
-        error: err.message
-    })
-
-
-
-
-}
-async function createTask(req, res) {
+async function getTaskCategories(req, res) {
     try {
-        const { title, category, priority } = req.body;
         const userId = req.user.id;
-        console.log("BODY:", req.body);
-        console.log("USER ID"), userId
-        if (!title || !category || !priority) {
-            return res.status(400).json({
-                message: "All fields are required."
-            })
-        }
-        const sql = "INSERT INTO Task(title,user_id,category,priority) VALUES (?,?,?,?)";
-        const [result] = await connection.query(sql, [title, userId, category, priority]);
-        res.status(201).json({
-            message: "Task created successfully",
-            id: result.insertId,
-            title,
-            user_id: userId,
-            category,
-            priority
+
+        const sql = `
+            SELECT category, COUNT(*) AS total
+            FROM Task
+            WHERE user_id = ?
+            GROUP BY category
+        `;
+
+        const [rows] = await connection.query(sql, [userId]);
+
+        const stats = {
+            Work: 0,
+            Personal: 0,
+            Creative: 0,
+            Health: 0,
+            Learning: 0
+        };
+
+        rows.forEach(row => {
+            if (stats.hasOwnProperty(row.category)) {
+                stats[row.category] = row.total;
+            }
         });
 
+        res.json(stats);
+
     } catch (err) {
-        console.error("CREATE TASK ERROR:", err);
+        console.error("GET TASK STATS ERROR:", err);
+
         res.status(500).json({
             error: err.message
         });
+    }
+}
+async function getTaskCategories(req, res) {
+    try {
+        const userId = req.user.id;
 
+        const sql = `
+            SELECT category, COUNT(*) AS total
+            FROM Task
+            WHERE user_id = ?
+            GROUP BY category
+        `;
 
+        const [rows] = await connection.query(sql, [userId]);
 
+        const stats = {
+            Work: 0,
+            Personal: 0,
+            Creative: 0,
+            Health: 0,
+            Learning: 0
+        };
+
+        rows.forEach(row => {
+            if (stats.hasOwnProperty(row.category)) {
+                stats[row.category] = Number(row.total);
+            }
+        });
+
+        console.log("CATEGORY STATS:", stats);
+
+        res.json(stats);
+
+    } catch (err) {
+        console.error("GET TASK STATS ERROR:", err);
+
+        res.status(500).json({
+            error: err.message
+        });
     }
 }
 module.exports = {

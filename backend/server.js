@@ -1,25 +1,29 @@
-const express=require('express');
+const express = require('express');
 const cors = require("cors");
-const app=express();
-const {connectDB} =require("./config/db");
-const authRoutes=require('./routes/authRoutes')
+
+const app = express();
+
+const { connectDB } = require("./config/db");
+
+const authRoutes = require('./routes/authRoutes');
 
 app.use(cors());
 app.use(express.json());
-app.get("/",(req,res)=>{
-    res.send("Hello !!")
+
+app.get("/", (req, res) => {
+    res.send("Hello !!");
 });
 
 connectDB();
 
 app.use("/user", require("./routes/userRoutes"));
+
 app.use("/task", require("./routes/todoRoutes"));
-app.use("/api/auth",authRoutes);
-app.use("/admin",require("./routes/adminRouter"))
 
+app.use("/api/auth", authRoutes);
 
+app.use("/admin", require("./routes/adminRouter"));
 
-app.listen(3000, () =>{
-    console.log("the server works!")
-
+app.listen(3000, () => {
+    console.log("the server works!");
 });
