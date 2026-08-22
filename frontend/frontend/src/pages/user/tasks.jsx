@@ -11,6 +11,7 @@ import { SiGoogletasks } from "react-icons/si";
 import { BiTaskX } from "react-icons/bi";
 import Barchart from '../../components/Barchart';
 import PieChartd from '../../components/PieChart';
+import { removeTask } from "../../services/task";
 
 export default function tasks() {
   const [category, setCategory] = useState('Work');
@@ -90,6 +91,19 @@ useEffect(() => {
     fetchTasks();
   }, []);
 
+const handleDelete = async (id) => {
+  try {
+    await removeTask(id);
+
+    setTask(
+      task.filter((item) => item.task_id !== id)
+    );
+
+  } catch (error) {
+    console.error(error);
+  }
+};
+
   function toggleTask(id) {
     setTask(
       task.map((item) =>
@@ -133,7 +147,8 @@ useEffect(() => {
       console.log(err)
 
     }
-  }
+  };
+
 
   return (
 
@@ -280,7 +295,7 @@ useEffect(() => {
                   >
                     {new Date(item.created_at).toDateString()}</p>
 
-                  <button className='bg-red-500 rounded-lg pl-5 pr-5 hover:bg-red-600'>Delete</button>
+                  <button onClick={() => handleDelete(task.id)} className='bg-red-500 rounded-lg pl-5 pr-5 hover:bg-red-600'>Delete</button>
 
 
                 </div>
