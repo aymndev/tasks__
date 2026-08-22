@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import NavBar from '../../components/NavBar'
+import NavBar from '../../components/NavBar';
+import { getTaskStats } from '../../services/task';
 import { FaRegCircle, FaCheckCircle } from "react-icons/fa";
 import { completeTask } from '../../services/task';
 import { getTask } from '../../services/task';
@@ -24,6 +25,20 @@ export default function tasks() {
   Health: 0,
   Learning: 0
 });
+useEffect(() => {
+  async function fetchStats() {
+    try {
+      const response = await getTaskStats();
+      console.log("Stats:", response.data);
+
+      setStats(response.data);
+    } catch (err) {
+      console.error("Error getting stats:", err);
+    }
+  }
+
+  fetchStats();
+}, []);
   const today = new Date()
   const option = {
     weekday: "long",

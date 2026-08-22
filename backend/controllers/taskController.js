@@ -91,10 +91,10 @@ try {
         SELECT category ,COUNT(*) AS totale
         FROM Task
         WHERE user_id=?
-        GROUPE BY category
+        GROUP BY category
         
         `
-    const [result] = await connection.query(sql, [userId])
+    const [rows] = await connection.query(sql, [userId]);
     const stats = {
         Work: 0,
         Personal: 0,
@@ -103,11 +103,11 @@ try {
         Learning: 0
     }
     rows.forEach(row => {
-        if (row.hasOwnProperty(row.category)) {
+        if (stats.hasOwnProperty(row.category)) {
             stats[row.category] = row.totale;
         }
     })
-    res.stats(stats);
+    res.json(stats);
 }
 
 
@@ -115,7 +115,7 @@ try {
 
 catch (err) {
     console.error("GET TASK STATS ERROR:", err);
-    res.status(500).jsom({
+    res.status(500).json({
         error: err.message
     })
 
