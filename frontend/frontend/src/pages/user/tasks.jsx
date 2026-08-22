@@ -143,7 +143,7 @@ useEffect(() => {
 
 
       <div className='flex pl-[20rem] flex-col flex-1 bg-green-900 text-white min-h-screen  w-full p-10  '>
-        <h1 className='tracking-wide text-4xl  md:text-5xl'>Today's Liste </h1>
+        <h1 className='tracking-wide text-4xl  md:text-5xl'>To Do Liste </h1>
         <h1 className=' flex text-lg  pt-4 mb-[4rem] font-medium'>{formattedDate}</h1>
         <div className='flex mb-10 justify-center w-full -translate-x-[12rem] gap-5'>
 
@@ -237,7 +237,7 @@ useEffect(() => {
 
             <div className='flex flex-row gap-[12rem] w-[68rem] ' key={item.task_id}>
 
-              <div className='flex  bg-white shadow-xl p-3  mt-5 rounded-xl w-[70rem]  flex-col '>
+              <div className='flex justify-between flex-col bg-white shadow-xl p-3  mt-5 rounded-xl w-[70rem]  flex-col '>
                 <div className='flex flex-row gap-3'>
                   {item.completed ? (
                     <FaCheckCircle onClick={() => handleComplete(item.task_id)}
@@ -275,10 +275,12 @@ useEffect(() => {
 
                   >{item.category}</button>
                   <button className='flex  border-1 rounded-lg p-1 mr-[45rem]'>{item.priority}</button>
-                  <p className='text-sm text-gray-500'
+                  <p className='text-sm text-gray-500 '
 
                   >
                     {new Date(item.created_at).toDateString()}</p>
+
+                  <button className='bg-red-500 rounded-lg pl-5 pr-5 hover:bg-red-600'>Delete</button>
 
 
                 </div>
