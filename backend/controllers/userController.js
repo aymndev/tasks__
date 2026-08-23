@@ -54,7 +54,14 @@ async function createUser(req, res) {
                 message:"All fields are required."
             })
         }
+        const [existingUsre]=await db.query("SELECT * FROM User WHERE email=?",[email]);
+        if (existingUsre.length>0){
+            return res.status(409).json({
+                message:"Email already exists"
+            })
 
+        }
+        const []
         const sql = "INSERT INTO User (username, email, password) VALUES (?, ?, ?)";
 
         const [result] = await db.query(sql, [name, email, password]);
