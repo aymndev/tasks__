@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { register } from "../services/auth";
 
 export default function Register() {
   const navigate = useNavigate();
@@ -9,27 +10,40 @@ export default function Register() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const handleRegister = (e) => {
+async function handleRegister(e) {
     e.preventDefault();
 
     if (!username || !email || !password || !confirmPassword) {
-      alert("Please fill in all fields");
-      return;
+        alert("Please fill in all fields");
+        return;
     }
 
     if (password !== confirmPassword) {
-      alert("Passwords do not match");
-      return;
+        alert("Passwords do not match");
+        return;
     }
 
-    console.log({
-      username,
-      email,
-      password
-    });
+    try {
+        const response = await register({
+            name: username,
+            email: email,
+            password: password
+        });
 
+        console.log(response.data);
 
-  };
+        alert("Account created successfully!");
+
+        navigate("/login");
+
+    } catch (error) {
+        console.error(error);
+
+        if (error.response) {
+            alert(error.response.data.message);
+        }
+    }
+}
 
   return (
     <div className="min-h-screen w-full bg-green-950 flex justify-center items-center">
@@ -114,6 +128,7 @@ export default function Register() {
           
           <button
             type="submit"
+            
             className="w-full h-11 bg-green-900 text-white rounded-lg font-bold text-lg mt-2 hover:bg-green-700 transition"
           >
             Create Account
