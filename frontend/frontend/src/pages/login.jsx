@@ -103,7 +103,9 @@ export default function Login() {
                         <button
                             onClick={handleLogin}
                             className='bg-green-900 w-full h-9 text-xl font-bold rounded-lg mb-5 mt-5 text-white hover:bg-green-500'>
-                            Sign in</button>
+                            Sign in
+                        </button>
+                        <button className="bg-yellow-400 text-xl font-bold rounded-lg mb-5  h-9 text-white hover:bg-yellow-600">Sign up</button>
 
                     </div>
                     <div className='flex flex-col bg-green-200 rounded-lg border-1 border-white w-full h-[30%] items-center justify-center'>
