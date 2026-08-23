@@ -9,3 +9,9 @@ export function login(data){
 export function getStatistics() {
     return axios.get(`${API}/admin/statistics`);
 }
+
+
+
+export function register(data) {
+    return axios.post(`${API}/user`, data);
+}

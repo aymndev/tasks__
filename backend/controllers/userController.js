@@ -48,8 +48,9 @@ async function removeUser(req, res) {
 
 async function createUser(req, res) {
     try {
-        const { name, email, password } = req.body;
-        if(!name || !email || ! password){
+    
+        const { username, email, password } = req.body;
+        if(!username || !email || ! password){
             return res.status(400).json({
                 message:"All fields are required."
             })
@@ -61,10 +62,11 @@ async function createUser(req, res) {
             })
 
         }
-        const [hashpassword]=await bcrypt.hash(password,10);
+        const hashpassword=await bcrypt.hash(password,10);
+        
         const sql = "INSERT INTO User (username, email, password) VALUES (?, ?, ?)";
 
-        const [result] = await db.query(sql, [name, email, hashpassword]);
+        const [result] = await db.query(sql, [username, email, hashpassword]);
 
         res.status(201).json({
             message: "User created successfully",

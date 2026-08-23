@@ -12,3 +12,4 @@ export function getAllUsers() {
 export function deleteUser(id) {
     return axios.delete(`http://localhost:3000/admin/users/${id}`);
 }
+
