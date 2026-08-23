@@ -3,6 +3,7 @@ import { FaLongArrowAltRight } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { login } from "../services/auth"
+import { Link } from "react-router-dom";
 
 
 
@@ -105,8 +106,16 @@ export default function Login() {
                             className='bg-green-900 w-full h-9 text-xl font-bold rounded-lg mb-5 mt-5 text-white hover:bg-green-500'>
                             Sign in
                         </button>
-                        <button className="bg-yellow-400 text-xl font-bold rounded-lg mb-5  h-9 text-white hover:bg-yellow-600">Sign up</button>
-
+                      
+                        <p className="text-center mt-4 text-gray-600">
+    Don't have an account?{" "}
+    <Link
+        to="/register"
+        className="text-blue-600 hover:underline"
+    >
+        Create an account
+    </Link>
+</p>
                     </div>
                     <div className='flex flex-col bg-green-200 rounded-lg border-1 border-white w-full h-[30%] items-center justify-center'>
                         <p className=' text-yellow-900 font-light text-sm '>Demo creadentials</p>
