@@ -92,6 +92,7 @@ useEffect(() => {
   }, []);
 
 const handleDelete = async (id) => {
+  console.log("DELETE CLICKED, ID:", id);
   try {
     await removeTask(id);
 
@@ -295,7 +296,7 @@ const handleDelete = async (id) => {
                   >
                     {new Date(item.created_at).toDateString()}</p>
 
-                  <button onClick={() => handleDelete(task.id)} className='bg-red-500 rounded-lg pl-5 pr-5 hover:bg-red-600'>Delete</button>
+                  <button onClick={() => handleDelete(item.task_id)} className='bg-red-500 rounded-lg pl-5 pr-5 hover:bg-red-600'>Delete</button>
 
 
                 </div>

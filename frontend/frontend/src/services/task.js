@@ -12,10 +12,10 @@ export function getTask() {
         },
     });
 }
-export function removeTask(){
+export function removeTask(id){
     const token =localStorage.getItem("token");
     return axios.delete(
-        `${API}/task`,{
+        `${API}/task/${id}`,{
 
             headers:{
                 Authorization:`Bearer ${token}`
