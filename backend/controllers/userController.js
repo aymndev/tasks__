@@ -61,18 +61,20 @@ async function createUser(req, res) {
             })
 
         }
-        const []
+        const [hashpassword]=await bcrypt.hash(password,10);
         const sql = "INSERT INTO User (username, email, password) VALUES (?, ?, ?)";
 
-        const [result] = await db.query(sql, [name, email, password]);
+        const [result] = await db.query(sql, [name, email, hashpassword]);
 
-        res.json({
+        res.status(201).json({
             message: "User created successfully",
             id: result.insertId
         });
 
     } catch (err) {
+        console.error("CREATE USER ERROR:", err);
         res.status(500).json(err);
+        
     }
 }
 
