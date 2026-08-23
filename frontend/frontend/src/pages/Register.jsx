@@ -2,8 +2,9 @@
 
 export default function Register() {
   return (
-    <div>
-        <h1>register</h1>
+    <div className="bg-green-500 h-full w-[50%]" >
+      <h1>Create a count</h1>
+        
       
     </div>
   )

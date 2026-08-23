@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { login } from "../services/auth"
 import { Link } from "react-router-dom";
+import Register from "./Register";
 
 
 
