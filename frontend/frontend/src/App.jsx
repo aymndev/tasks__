@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route ,Navigate} from "react-router-dom";
 import Login from "./pages/login";
 import Tasks from "./pages/user/tasks"
+import Register from "./pages/Register";
 
 
 
@@ -21,6 +22,7 @@ function App() {
     
       
         <Route path="/admin/dashboard" element={<Dashboard />} />
+        <Route path="/register" element={<Register/>}/>
         <Route
           path="/admin/pending-users"
           element={<PendingUsers />}
