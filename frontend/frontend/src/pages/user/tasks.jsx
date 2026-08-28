@@ -13,7 +13,7 @@ import Barchart from '../../components/Barchart';
 import PieChartd from '../../components/PieChart';
 import { removeTask } from "../../services/task";
 
-export default function tasks() {
+export default function Tasks() {
   const [category, setCategory] = useState('Work');
   const [task, setTask] = useState([]);
   const [priority, setPriority] = useState('Medium');
@@ -248,7 +248,23 @@ const handleDelete = async (id) => {
 
           </div>
         </div>
-        <div className=' flex flex-col gap-5 mt-[8rem]  text-black rounded-lg   shadow-xl'>
+        <div className='flex gap-2 mt-[6rem] mb-2'>
+          <input
+            className='bg-white text-black p-2 pr-[10rem] w-full pl-2 shadow-md rounded-lg focus:outline-none text-sm'
+            type='text'
+            placeholder='Search tasks...'
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
+          />
+          <button 
+            className='bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg shadow-md text-sm'
+            onClick={handleSearch}
+          >
+            Search
+          </button>
+        </div>
+        <div className=' flex flex-col gap-5   text-black rounded-lg   shadow-xl'>
           {task.map((item) => (
 
             <div className='flex flex-row gap-[12rem] w-[68rem] ' key={item.task_id}>
