@@ -121,45 +121,6 @@ async function getTaskCategories(req, res) {
         });
     }
 }
-async function getTaskCategories(req, res) {
-    try {
-        const userId = req.user.id;
-
-        const sql = `
-            SELECT category, COUNT(*) AS total
-            FROM Task
-            WHERE user_id = ?
-            GROUP BY category
-        `;
-
-        const [rows] = await connection.query(sql, [userId]);
-
-        const stats = {
-            Work: 0,
-            Personal: 0,
-            Creative: 0,
-            Health: 0,
-            Learning: 0
-        };
-
-        rows.forEach(row => {
-            if (stats.hasOwnProperty(row.category)) {
-                stats[row.category] = Number(row.total);
-            }
-        });
-
-        console.log("CATEGORY STATS:", stats);
-
-        res.json(stats);
-
-    } catch (err) {
-        console.error("GET TASK STATS ERROR:", err);
-
-        res.status(500).json({
-            error: err.message
-        });
-    }
-}
 async function createTask(req, res) {
     try {
         const { title, category, priority } = req.body;

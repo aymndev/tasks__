@@ -182,6 +182,12 @@ const handleDelete = async (id) => {
           <p className='relative rounded-lg p-6 border flex-1 flex items-center justify-center'> <FaTasks className='  absolute left-6 h-3 w-3 ' />Totale  :{totaleTasks}</p>
           <p className='relative rounded-lg p-6 border flex-1 flex items-center justify-center  '><BiTaskX className='  absolute left-6 h-3 w-3  ' /> Incomplete :{taskCompleted}</p>
           <p className='relative rounded-lg p-6 border flex-1 flex items-center justify-center'> <SiGoogletasks className='  absolute left-6 h-3 w-3 ' />Completed : {taskNotcompleted}</p>
+         {/* Search Bar at Top */}
+
+
+        {/* Centered Task Creation Form */}
+      
+        
         </div>
 
 
@@ -248,22 +254,7 @@ const handleDelete = async (id) => {
 
           </div>
         </div>
-        <div className='flex gap-2 mt-[6rem] mb-2'>
-          <input
-            className='bg-white text-black p-2 pr-[10rem] w-full pl-2 shadow-md rounded-lg focus:outline-none text-sm'
-            type='text'
-            placeholder='Search tasks...'
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
-          />
-          <button 
-            className='bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg shadow-md text-sm'
-            onClick={handleSearch}
-          >
-            Search
-          </button>
-        </div>
+
         <div className=' flex flex-col gap-5   text-black rounded-lg   shadow-xl'>
           {task.map((item) => (
 
